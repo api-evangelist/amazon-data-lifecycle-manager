@@ -1,0 +1,68 @@
+aid: amazon-data-lifecycle-manager
+name: Amazon Data Lifecycle Manager
+description: >-
+  Amazon Data Lifecycle Manager provides an automated way to manage the
+  lifecycle of your AWS resources. Using lifecycle policies, you can automate
+  the creation, retention, and deletion of Amazon EBS snapshots and
+  EBS-backed AMIs, reducing storage costs and simplifying backup management.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - Storage
+  - Lifecycle Management
+  - EBS Snapshots
+  - Backup
+  - AWS
+url: >-
+  https://raw.githubusercontent.com/api-evangelist/amazon-data-lifecycle-manager/refs/heads/main/apis.yml
+created: '2026-03-16'
+modified: '2026-03-16'
+specificationVersion: '0.19'
+apis:
+  - aid: amazon-data-lifecycle-manager:amazon-dlm-api
+    name: Amazon Data Lifecycle Manager API
+    description: >-
+      The Amazon Data Lifecycle Manager API enables programmatic management of
+      lifecycle policies for automating the creation, retention, and deletion
+      of EBS snapshots and AMIs to meet backup and compliance requirements.
+    humanURL: https://aws.amazon.com/ebs/data-lifecycle-manager/
+    baseURL: https://dlm.amazonaws.com
+    tags:
+      - Lifecycle Management
+      - EBS Snapshots
+      - Automation
+    properties:
+      - type: Documentation
+        url: https://docs.aws.amazon.com/dlm/latest/APIReference/Welcome.html
+      - type: OpenAPI
+        url: https://api.apis.guru/v2/specs/amazonaws.com/dlm/2018-01-12/openapi.yaml
+      - type: Getting Started
+        url: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshot-lifecycle.html
+common:
+  - type: Portal
+    url: https://aws.amazon.com/ebs/data-lifecycle-manager/
+  - type: Website
+    url: https://aws.amazon.com/ebs/data-lifecycle-manager/
+  - type: Documentation
+    url: https://docs.aws.amazon.com/dlm/
+  - type: Terms of Service
+    url: https://aws.amazon.com/service-terms/
+  - type: Privacy Policy
+    url: https://aws.amazon.com/privacy/
+  - type: Support
+    url: https://aws.amazon.com/premiumsupport/
+  - type: GitHub Organization
+    url: https://github.com/aws
+  - type: Console
+    url: https://console.aws.amazon.com/ec2/v2/home#Lifecycle
+  - type: Sign Up
+    url: https://portal.aws.amazon.com/billing/signup
+  - type: Login
+    url: https://signin.aws.amazon.com/
+  - type: Status
+    url: https://health.aws.amazon.com/health/status
+  - type: Contact
+    url: https://aws.amazon.com/contact-us/
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
