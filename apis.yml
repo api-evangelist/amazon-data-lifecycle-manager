@@ -8,11 +8,11 @@ description: >-
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-  - Storage
-  - Lifecycle Management
-  - EBS Snapshots
-  - Backup
   - AWS
+  - Backup
+  - EBS Snapshots
+  - Lifecycle Management
+  - Storage
 url: >-
   https://raw.githubusercontent.com/api-evangelist/amazon-data-lifecycle-manager/refs/heads/main/apis.yml
 created: '2026-03-16'
@@ -28,9 +28,9 @@ apis:
     humanURL: https://aws.amazon.com/ebs/data-lifecycle-manager/
     baseURL: https://dlm.amazonaws.com
     tags:
-      - Lifecycle Management
-      - EBS Snapshots
       - Automation
+      - EBS Snapshots
+      - Lifecycle Management
     properties:
       - type: Documentation
         url: https://docs.aws.amazon.com/dlm/latest/APIReference/Welcome.html
