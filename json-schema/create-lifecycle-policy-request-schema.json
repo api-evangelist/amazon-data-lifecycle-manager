@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/amazon-data-lifecycle-manager/json-schema/create-lifecycle-policy-request-schema.json",
+  "title": "Create Lifecycle Policy Request",
+  "description": "Request body for creating a new lifecycle policy.",
+  "type": "object",
+  "required": [
+    "Description",
+    "State",
+    "ExecutionRoleArn",
+    "PolicyDetails"
+  ],
+  "properties": {
+    "Description": {
+      "type": "string"
+    },
+    "State": {
+      "type": "string",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ]
+    },
+    "ExecutionRoleArn": {
+      "type": "string"
+    },
+    "PolicyDetails": {
+      "type": "object"
+    },
+    "Tags": {
+      "type": "object"
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://api-evangelist.github.io/amazon-data-lifecycle-manager/json-structure/create-lifecycle-policy-response-structure.json",
+  "title": "Create Lifecycle Policy Response",
+  "description": "Response after creating a lifecycle policy.",
+  "type": "typedMap",
+  "fields": {
+    "PolicyId": {
+      "type": "str",
+      "description": "PolicyId"
+    }
+  }
+}

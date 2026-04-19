@@ -1,0 +1,124 @@
+id: https://api-evangelist.github.io/amazon-data-lifecycle-manager/vocabulary/amazon-data-lifecycle-manager-vocabulary.yaml
+name: Amazon Data Lifecycle Manager Vocabulary
+description: Controlled vocabulary for Amazon Data Lifecycle Manager covering lifecycle policies, schedules, retention rules, and automated snapshot management concepts.
+version: 1.0.0
+specificationVersion: 1.0.0
+
+tags:
+  - AWS
+  - Backup
+  - EBS Snapshots
+  - Lifecycle Management
+
+operational:
+  resources:
+    - term: LifecyclePolicy
+      definition: An automated policy that manages the creation, retention, and deletion of EBS snapshots or AMIs
+      aliases:
+        - Policy
+        - BackupPolicy
+    - term: Schedule
+      definition: A time-based plan within a lifecycle policy that specifies when to create snapshots
+    - term: CreateRule
+      definition: The rule within a schedule that specifies snapshot creation frequency and timing
+    - term: RetainRule
+      definition: The rule within a schedule that specifies how long or how many snapshots to keep
+    - term: PolicyDetails
+      definition: The complete configuration of a lifecycle policy including type, targets, and schedules
+    - term: TargetTags
+      definition: Key-value tags that identify the EBS volumes or EC2 instances to be managed by a policy
+    - term: TagsToAdd
+      definition: Key-value tags automatically applied to each snapshot created by the policy schedule
+
+  actions:
+    - term: CreateLifecyclePolicy
+      definition: Create a new automated lifecycle policy for managing EBS snapshots or AMIs
+    - term: UpdateLifecyclePolicy
+      definition: Modify an existing lifecycle policy, including enabling, disabling, or changing schedules
+    - term: DeleteLifecyclePolicy
+      definition: Remove a lifecycle policy and stop all automated operations it managed
+    - term: EnablePolicy
+      definition: Activate a lifecycle policy to resume automated snapshot operations
+    - term: DisablePolicy
+      definition: Temporarily halt automated operations for a lifecycle policy without deleting it
+
+  policyTypes:
+    - term: EBS_SNAPSHOT_MANAGEMENT
+      definition: Lifecycle policy type for automating EBS volume snapshot creation and retention
+    - term: IMAGE_MANAGEMENT
+      definition: Lifecycle policy type for automating Amazon Machine Image (AMI) creation and deregistration
+    - term: EVENT_BASED_POLICY
+      definition: Lifecycle policy type triggered by CloudWatch Events for cross-account snapshot sharing
+
+  policyStates:
+    - term: ENABLED
+      definition: The lifecycle policy is active and will create snapshots according to its schedule
+    - term: DISABLED
+      definition: The lifecycle policy is paused and will not create new snapshots
+    - term: ERROR
+      definition: The lifecycle policy encountered an error and cannot execute its schedule
+
+  intervalUnits:
+    - term: HOURS
+      definition: Snapshot creation interval measured in hours (used in CreateRule)
+    - term: DAYS
+      definition: Retention period measured in days (used in RetainRule)
+    - term: WEEKS
+      definition: Retention period measured in weeks (used in RetainRule)
+    - term: MONTHS
+      definition: Retention period measured in months (used in RetainRule)
+    - term: YEARS
+      definition: Retention period measured in years (used in RetainRule)
+
+capability:
+  personas:
+    - term: Cloud Operations Engineer
+      definition: Engineer responsible for defining and maintaining EBS backup policies across AWS infrastructure
+    - term: Compliance Officer
+      definition: Officer responsible for ensuring backup retention policies meet regulatory requirements
+    - term: Storage Administrator
+      definition: Administrator optimizing EBS storage costs through automated snapshot lifecycle management
+
+  workflows:
+    - term: Create Backup Policy
+      definition: End-to-end workflow for creating and activating an EBS snapshot lifecycle policy
+      steps:
+        - CreateLifecyclePolicy
+        - VerifyPolicyEnabled
+    - term: Compliance Audit
+      definition: Reviewing all active lifecycle policies to verify retention settings meet requirements
+      steps:
+        - ListPolicies
+        - InspectEachPolicy
+        - DocumentFindings
+    - term: Policy Decommission
+      definition: Safely removing a lifecycle policy when it is no longer needed
+      steps:
+        - ReviewPolicy
+        - DeleteLifecyclePolicy
+
+crossReference:
+  awsServices:
+    - term: Amazon EBS
+      definition: Elastic Block Store volumes are the primary resource managed by DLM lifecycle policies
+      url: https://aws.amazon.com/ebs/
+    - term: Amazon EC2
+      definition: EC2 instances can be targeted by IMAGE_MANAGEMENT lifecycle policies for AMI automation
+      url: https://aws.amazon.com/ec2/
+    - term: Amazon CloudWatch
+      definition: CloudWatch Events trigger EVENT_BASED_POLICY lifecycle policies
+      url: https://aws.amazon.com/cloudwatch/
+    - term: AWS Backup
+      definition: Alternative managed backup service that complements DLM for broader AWS resource backup coverage
+      url: https://aws.amazon.com/backup/
+    - term: AWS IAM
+      definition: IAM execution roles are required by DLM policies to create and delete snapshots on your behalf
+      url: https://aws.amazon.com/iam/
+
+  compliance:
+    - term: RTO
+      definition: Recovery Time Objective — the maximum acceptable time to restore from a snapshot backup
+    - term: RPO
+      definition: Recovery Point Objective — the maximum acceptable data loss measured in time between snapshots
+    - term: Retention Period
+      definition: The length of time a snapshot is preserved before automatic deletion per policy rules

@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/amazon-data-lifecycle-manager/json-schema/create-rule-schema.json",
+  "title": "Create Rule",
+  "description": "Specifies when and how to create snapshots.",
+  "type": "object",
+  "properties": {
+    "Interval": {
+      "type": "integer",
+      "description": "The interval between snapshots"
+    },
+    "IntervalUnit": {
+      "type": "string",
+      "enum": [
+        "HOURS"
+      ]
+    },
+    "Times": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "CronExpression": {
+      "type": "string"
+    }
+  }
+}

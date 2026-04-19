@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://api-evangelist.github.io/amazon-data-lifecycle-manager/json-structure/tag-structure.json",
+  "title": "Tag",
+  "description": "A key-value tag pair applied to an AWS resource.",
+  "type": "typedMap",
+  "fields": {
+    "Key": {
+      "type": "str",
+      "description": "The tag key"
+    },
+    "Value": {
+      "type": "str",
+      "description": "The tag value"
+    }
+  }
+}

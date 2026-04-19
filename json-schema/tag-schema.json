@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/amazon-data-lifecycle-manager/json-schema/tag-schema.json",
+  "title": "Tag",
+  "description": "A key-value tag pair applied to an AWS resource.",
+  "type": "object",
+  "required": [
+    "Key",
+    "Value"
+  ],
+  "properties": {
+    "Key": {
+      "type": "string",
+      "description": "The tag key"
+    },
+    "Value": {
+      "type": "string",
+      "description": "The tag value"
+    }
+  }
+}

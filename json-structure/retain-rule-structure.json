@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://api-evangelist.github.io/amazon-data-lifecycle-manager/json-structure/retain-rule-structure.json",
+  "title": "Retain Rule",
+  "description": "Specifies retention settings for snapshots.",
+  "type": "typedMap",
+  "fields": {
+    "Count": {
+      "type": "int",
+      "description": "The number of snapshots to retain"
+    },
+    "Interval": {
+      "type": "int",
+      "description": "Interval"
+    },
+    "IntervalUnit": {
+      "type": "str",
+      "description": "IntervalUnit"
+    }
+  }
+}

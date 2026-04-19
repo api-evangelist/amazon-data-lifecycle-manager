@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/amazon-data-lifecycle-manager/json-schema/retain-rule-schema.json",
+  "title": "Retain Rule",
+  "description": "Specifies retention settings for snapshots.",
+  "type": "object",
+  "properties": {
+    "Count": {
+      "type": "integer",
+      "description": "The number of snapshots to retain"
+    },
+    "Interval": {
+      "type": "integer"
+    },
+    "IntervalUnit": {
+      "type": "string",
+      "enum": [
+        "DAYS",
+        "WEEKS",
+        "MONTHS",
+        "YEARS"
+      ]
+    }
+  }
+}

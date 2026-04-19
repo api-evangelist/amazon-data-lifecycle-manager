@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/amazon-data-lifecycle-manager/json-schema/lifecycle-policy-schema.json",
+  "title": "Lifecycle Policy",
+  "description": "A complete lifecycle policy definition for automating EBS snapshot or AMI management.",
+  "type": "object",
+  "properties": {
+    "PolicyId": {
+      "type": "string",
+      "description": "The identifier of the lifecycle policy"
+    },
+    "Description": {
+      "type": "string"
+    },
+    "State": {
+      "type": "string",
+      "enum": [
+        "ENABLED",
+        "DISABLED",
+        "ERROR"
+      ]
+    },
+    "ExecutionRoleArn": {
+      "type": "string",
+      "description": "The ARN of the IAM role used by DLM"
+    },
+    "DateCreated": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "DateModified": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "PolicyDetails": {
+      "type": "object"
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "Policies": [
+    {
+      "PolicyId": "policy-0abc123def456",
+      "State": "ENABLED"
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+id: https://api-evangelist.github.io/amazon-data-lifecycle-manager/capabilities/backup-automation-operations.yaml
+name: Backup Automation Operations
+description: Workflow-oriented Naftiko capability for automating EBS backup and retention operations using Amazon Data Lifecycle Manager, covering policy creation, monitoring, and lifecycle management workflows.
+version: 1.0.0-alpha1
+specificationVersion: 1.0.0-alpha1
+
+tags:
+  - Backup
+  - Automation
+  - EBS Snapshots
+  - Compliance
+  - Disaster Recovery
+
+imports:
+  - url: capabilities/shared/data-lifecycle-manager.yaml
+    as: dlm
+
+personas:
+  - name: Cloud Operations Engineer
+    description: Engineer responsible for managing EBS backup and retention policies across AWS accounts
+  - name: Compliance Officer
+    description: Officer ensuring backup policies meet regulatory retention requirements
+  - name: Storage Administrator
+    description: Administrator managing EBS storage costs through lifecycle automation
+
+workflows:
+  - name: Create Backup Policy
+    description: Create and activate an automated EBS snapshot backup policy
+    steps:
+      - step: createLifecyclePolicy
+        capability: dlm
+        description: Create a lifecycle policy with schedule and retention rules
+      - step: getLifecyclePolicy
+        capability: dlm
+        description: Verify the policy was created and is in ENABLED state
+    persona: Cloud Operations Engineer
+
+  - name: Audit Backup Policies
+    description: Review all active backup policies and their configurations
+    steps:
+      - step: getLifecyclePolicies
+        capability: dlm
+        description: List all lifecycle policies with their states
+      - step: getLifecyclePolicy
+        capability: dlm
+        description: Inspect details of each policy for compliance review
+    persona: Compliance Officer
+
+  - name: Suspend Backup Policy
+    description: Temporarily disable a backup policy during maintenance windows
+    steps:
+      - step: updateLifecyclePolicy
+        capability: dlm
+        description: Set policy state to DISABLED
+      - step: getLifecyclePolicy
+        capability: dlm
+        description: Confirm policy is disabled
+    persona: Cloud Operations Engineer
+
+  - name: Decommission Backup Policy
+    description: Remove a backup policy when it is no longer needed
+    steps:
+      - step: getLifecyclePolicy
+        capability: dlm
+        description: Review policy before deletion
+      - step: deleteLifecyclePolicy
+        capability: dlm
+        description: Delete the lifecycle policy
+    persona: Storage Administrator
+
+rest:
+  port: 8080
+  baseURL: https://dlm.amazonaws.com
+  auth:
+    type: aws-signature-v4
+    service: dlm
+
+mcp:
+  port: 9090
+  tools:
+    - name: create_backup_policy
+      description: Create an automated EBS snapshot backup policy with schedule and retention rules
+      workflow: Create Backup Policy
+    - name: audit_backup_policies
+      description: List and review all active backup policies for compliance
+      workflow: Audit Backup Policies
+    - name: suspend_backup_policy
+      description: Temporarily disable a backup policy during maintenance
+      workflow: Suspend Backup Policy
+    - name: decommission_backup_policy
+      description: Remove a backup policy that is no longer needed
+      workflow: Decommission Backup Policy

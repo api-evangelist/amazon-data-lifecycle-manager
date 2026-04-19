@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://api-evangelist.github.io/amazon-data-lifecycle-manager/json-structure/update-lifecycle-policy-request-structure.json",
+  "title": "Update Lifecycle Policy Request",
+  "description": "Request body for updating a lifecycle policy.",
+  "type": "typedMap",
+  "fields": {
+    "State": {
+      "type": "str",
+      "description": "State"
+    },
+    "Description": {
+      "type": "str",
+      "description": "Description"
+    },
+    "ExecutionRoleArn": {
+      "type": "str",
+      "description": "ExecutionRoleArn"
+    },
+    "PolicyDetails": {
+      "type": "map",
+      "description": "PolicyDetails"
+    }
+  }
+}

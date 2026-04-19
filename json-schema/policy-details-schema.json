@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/amazon-data-lifecycle-manager/json-schema/policy-details-schema.json",
+  "title": "Policy Details",
+  "description": "Specifies the configuration of a lifecycle policy.",
+  "type": "object",
+  "properties": {
+    "PolicyType": {
+      "type": "string",
+      "enum": [
+        "EBS_SNAPSHOT_MANAGEMENT",
+        "IMAGE_MANAGEMENT",
+        "EVENT_BASED_POLICY"
+      ]
+    },
+    "ResourceTypes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "TargetTags": {
+      "type": "array"
+    },
+    "Schedules": {
+      "type": "array"
+    }
+  }
+}

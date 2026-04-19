@@ -1,0 +1,6 @@
+{
+  "PolicyId": "policy-0abc123def456",
+  "Description": "Daily EBS snapshot policy",
+  "State": "ENABLED",
+  "PolicyType": "EBS_SNAPSHOT_MANAGEMENT"
+}

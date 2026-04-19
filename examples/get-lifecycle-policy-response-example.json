@@ -1,0 +1,7 @@
+{
+  "Policy": {
+    "PolicyId": "policy-0abc123def456",
+    "State": "ENABLED",
+    "Description": "Daily backup"
+  }
+}

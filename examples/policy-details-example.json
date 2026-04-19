@@ -1,0 +1,12 @@
+{
+  "PolicyType": "EBS_SNAPSHOT_MANAGEMENT",
+  "ResourceTypes": [
+    "VOLUME"
+  ],
+  "TargetTags": [
+    {
+      "Key": "Environment",
+      "Value": "Production"
+    }
+  ]
+}

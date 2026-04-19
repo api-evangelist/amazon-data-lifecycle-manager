@@ -1,0 +1,48 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "aws": "https://aws.amazon.com/ebs/data-lifecycle-manager/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+
+    "LifecyclePolicy": {"@id": "aws:LifecyclePolicy"},
+    "LifecyclePolicySummary": {"@id": "aws:LifecyclePolicySummary"},
+    "PolicyDetails": {"@id": "aws:PolicyDetails"},
+    "Schedule": {"@id": "aws:Schedule"},
+    "CreateRule": {"@id": "aws:CreateRule"},
+    "RetainRule": {"@id": "aws:RetainRule"},
+    "Tag": {"@id": "aws:Tag"},
+
+    "PolicyId": {"@id": "aws:policyId", "@type": "xsd:string"},
+    "Description": {"@id": "schema:description", "@type": "xsd:string"},
+    "State": {"@id": "aws:state", "@type": "xsd:string"},
+    "StatusMessage": {"@id": "aws:statusMessage", "@type": "xsd:string"},
+    "ExecutionRoleArn": {"@id": "aws:executionRoleArn", "@type": "xsd:string"},
+    "PolicyType": {"@id": "aws:policyType", "@type": "xsd:string"},
+    "PolicySummary": {"@id": "aws:policySummary", "@type": "xsd:string"},
+    "ResourceTypes": {"@id": "aws:resourceTypes", "@container": "@set"},
+    "TargetTags": {"@id": "aws:targetTags", "@container": "@set"},
+    "Schedules": {"@id": "aws:schedules", "@container": "@set"},
+    "Policies": {"@id": "aws:policies", "@container": "@set"},
+
+    "Name": {"@id": "schema:name", "@type": "xsd:string"},
+    "Interval": {"@id": "aws:interval", "@type": "xsd:integer"},
+    "IntervalUnit": {"@id": "aws:intervalUnit", "@type": "xsd:string"},
+    "Times": {"@id": "aws:times", "@container": "@set"},
+    "CronExpression": {"@id": "aws:cronExpression", "@type": "xsd:string"},
+    "Count": {"@id": "aws:retainCount", "@type": "xsd:integer"},
+    "TagsToAdd": {"@id": "aws:tagsToAdd", "@container": "@set"},
+    "CopyTags": {"@id": "aws:copyTags", "@type": "xsd:boolean"},
+
+    "Key": {"@id": "aws:tagKey", "@type": "xsd:string"},
+    "Value": {"@id": "aws:tagValue", "@type": "xsd:string"},
+    "Tags": {"@id": "aws:tags"},
+
+    "DateCreated": {"@id": "schema:dateCreated", "@type": "xsd:dateTime"},
+    "DateModified": {"@id": "schema:dateModified", "@type": "xsd:dateTime"},
+
+    "message": {"@id": "schema:description", "@type": "xsd:string"},
+    "code": {"@id": "aws:errorCode", "@type": "xsd:string"},
+    "requestId": {"@id": "aws:requestId", "@type": "xsd:string"}
+  }
+}

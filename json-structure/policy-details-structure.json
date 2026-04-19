@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://api-evangelist.github.io/amazon-data-lifecycle-manager/json-structure/policy-details-structure.json",
+  "title": "Policy Details",
+  "description": "Specifies the configuration of a lifecycle policy.",
+  "type": "typedMap",
+  "fields": {
+    "PolicyType": {
+      "type": "str",
+      "description": "PolicyType"
+    },
+    "ResourceTypes": {
+      "type": "list",
+      "description": "ResourceTypes"
+    },
+    "TargetTags": {
+      "type": "list",
+      "description": "TargetTags"
+    },
+    "Schedules": {
+      "type": "list",
+      "description": "Schedules"
+    }
+  }
+}

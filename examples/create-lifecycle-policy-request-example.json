@@ -1,0 +1,11 @@
+{
+  "Description": "Daily EBS snapshot policy",
+  "State": "ENABLED",
+  "ExecutionRoleArn": "arn:aws:iam::123456789012:role/AWSDataLifecycleManagerDefaultRole",
+  "PolicyDetails": {
+    "PolicyType": "EBS_SNAPSHOT_MANAGEMENT",
+    "ResourceTypes": [
+      "VOLUME"
+    ]
+  }
+}

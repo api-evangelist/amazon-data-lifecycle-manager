@@ -1,0 +1,5 @@
+{
+  "message": "Policy not found",
+  "code": "ResourceNotFoundException",
+  "requestId": "req-abc123"
+}

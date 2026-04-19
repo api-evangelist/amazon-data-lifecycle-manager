@@ -1,0 +1,80 @@
+id: https://api-evangelist.github.io/amazon-data-lifecycle-manager/capabilities/shared/data-lifecycle-manager.yaml
+name: Amazon Data Lifecycle Manager API
+description: Naftiko shared capability definition for Amazon Data Lifecycle Manager API, providing programmatic management of lifecycle policies for automating EBS snapshot and AMI creation, retention, and deletion.
+version: 1.0.0-alpha1
+specificationVersion: 1.0.0-alpha1
+
+provider:
+  name: Amazon Web Services
+  url: https://aws.amazon.com
+
+tags:
+  - AWS
+  - Backup
+  - EBS Snapshots
+  - Lifecycle Management
+
+rest:
+  port: 8100
+  baseURL: https://dlm.amazonaws.com
+  auth:
+    type: aws-signature-v4
+    service: dlm
+  resources:
+    - name: Lifecycle Policies
+      description: Manage EBS snapshot and AMI lifecycle policies
+      operations:
+        - operationId: getLifecyclePolicies
+          summary: Get Lifecycle Policies
+          method: GET
+          path: /policies
+        - operationId: createLifecyclePolicy
+          summary: Create Lifecycle Policy
+          method: POST
+          path: /policies
+        - operationId: getLifecyclePolicy
+          summary: Get Lifecycle Policy
+          method: GET
+          path: /policies/{policyId}
+        - operationId: updateLifecyclePolicy
+          summary: Update Lifecycle Policy
+          method: PATCH
+          path: /policies/{policyId}
+        - operationId: deleteLifecyclePolicy
+          summary: Delete Lifecycle Policy
+          method: DELETE
+          path: /policies/{policyId}
+    - name: Tags
+      description: Manage tags on DLM resources
+      operations:
+        - operationId: listTagsForResource
+          summary: List Tags for Resource
+          method: GET
+          path: /tags/{resourceArn}
+        - operationId: tagResource
+          summary: Tag Resource
+          method: POST
+          path: /tags/{resourceArn}
+        - operationId: untagResource
+          summary: Untag Resource
+          method: DELETE
+          path: /tags/{resourceArn}
+
+mcp:
+  port: 9100
+  tools:
+    - name: create_lifecycle_policy
+      description: Create a new EBS snapshot or AMI lifecycle policy
+      operationId: createLifecyclePolicy
+    - name: get_lifecycle_policy
+      description: Get the details of a lifecycle policy
+      operationId: getLifecyclePolicy
+    - name: list_lifecycle_policies
+      description: List all lifecycle policies
+      operationId: getLifecyclePolicies
+    - name: update_lifecycle_policy
+      description: Update a lifecycle policy configuration or state
+      operationId: updateLifecyclePolicy
+    - name: delete_lifecycle_policy
+      description: Delete a lifecycle policy
+      operationId: deleteLifecyclePolicy

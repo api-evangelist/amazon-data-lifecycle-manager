@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/amazon-data-lifecycle-manager/json-schema/get-lifecycle-policy-response-schema.json",
+  "title": "Get Lifecycle Policy Response",
+  "description": "Response containing the details of a lifecycle policy.",
+  "type": "object",
+  "properties": {
+    "Policy": {
+      "type": "object"
+    }
+  }
+}

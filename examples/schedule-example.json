@@ -1,0 +1,11 @@
+{
+  "Name": "Daily Snapshots",
+  "CreateRule": {
+    "Interval": 24,
+    "IntervalUnit": "HOURS"
+  },
+  "RetainRule": {
+    "Count": 7
+  },
+  "CopyTags": true
+}

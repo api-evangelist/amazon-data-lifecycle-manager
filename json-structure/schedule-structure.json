@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://api-evangelist.github.io/amazon-data-lifecycle-manager/json-structure/schedule-structure.json",
+  "title": "Schedule",
+  "description": "Specifies the schedule for creating snapshots.",
+  "type": "typedMap",
+  "fields": {
+    "Name": {
+      "type": "str",
+      "description": "The name of the schedule"
+    },
+    "CreateRule": {
+      "type": "map",
+      "description": "CreateRule"
+    },
+    "RetainRule": {
+      "type": "map",
+      "description": "RetainRule"
+    },
+    "TagsToAdd": {
+      "type": "list",
+      "description": "TagsToAdd"
+    },
+    "CopyTags": {
+      "type": "bool",
+      "description": "CopyTags"
+    }
+  }
+}

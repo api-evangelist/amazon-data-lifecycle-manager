@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://api-evangelist.github.io/amazon-data-lifecycle-manager/json-structure/lifecycle-policy-summary-structure.json",
+  "title": "Lifecycle Policy Summary",
+  "description": "Summary information about a lifecycle policy.",
+  "type": "typedMap",
+  "fields": {
+    "PolicyId": {
+      "type": "str",
+      "description": "The identifier of the lifecycle policy"
+    },
+    "Description": {
+      "type": "str",
+      "description": "Description"
+    },
+    "State": {
+      "type": "str",
+      "description": "State"
+    },
+    "PolicyType": {
+      "type": "str",
+      "description": "PolicyType"
+    },
+    "PolicySummary": {
+      "type": "str",
+      "description": "PolicySummary"
+    }
+  }
+}

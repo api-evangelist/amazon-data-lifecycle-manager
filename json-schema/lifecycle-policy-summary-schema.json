@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/amazon-data-lifecycle-manager/json-schema/lifecycle-policy-summary-schema.json",
+  "title": "Lifecycle Policy Summary",
+  "description": "Summary information about a lifecycle policy.",
+  "type": "object",
+  "properties": {
+    "PolicyId": {
+      "type": "string",
+      "description": "The identifier of the lifecycle policy"
+    },
+    "Description": {
+      "type": "string"
+    },
+    "State": {
+      "type": "string",
+      "enum": [
+        "ENABLED",
+        "DISABLED",
+        "ERROR"
+      ]
+    },
+    "PolicyType": {
+      "type": "string"
+    },
+    "PolicySummary": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,660 @@
+openapi: 3.1.0
+info:
+  title: Amazon Data Lifecycle Manager API
+  description: The Amazon Data Lifecycle Manager API enables programmatic management of lifecycle policies for automating the creation, retention, and deletion of EBS snapshots and AMIs to meet backup and compliance requirements.
+  version: 2018-01-12
+  contact:
+    name: AWS Support
+    url: https://aws.amazon.com/premiumsupport/
+
+servers:
+  - url: https://dlm.amazonaws.com
+    description: Amazon Data Lifecycle Manager API
+
+tags:
+  - name: Lifecycle Policies
+    description: Operations for managing EBS snapshot and AMI lifecycle policies
+  - name: Tags
+    description: Operations for managing resource tags
+
+security:
+  - awsSignatureV4: []
+
+paths:
+  /policies:
+    get:
+      operationId: getLifecyclePolicies
+      summary: Get Lifecycle Policies
+      description: Returns a list of lifecycle policies based on the specified filters.
+      tags:
+        - Lifecycle Policies
+      parameters:
+        - name: policyIds
+          in: query
+          description: List of policy IDs to filter by
+          schema:
+            type: array
+            items:
+              type: string
+        - name: state
+          in: query
+          description: Filter by policy state
+          schema:
+            type: string
+            enum: [ENABLED, DISABLED, ERROR]
+        - name: resourceTypes
+          in: query
+          description: Filter by resource type
+          schema:
+            type: array
+            items:
+              type: string
+              enum: [VOLUME, INSTANCE]
+        - name: targetTags
+          in: query
+          description: Filter by target tags
+          schema:
+            type: array
+            items:
+              type: string
+        - name: tagsToAdd
+          in: query
+          description: Filter by tags added to snapshots
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: List of lifecycle policies returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetLifecyclePoliciesResponse'
+              examples:
+                default:
+                  x-microcks-default: true
+                  value:
+                    Policies:
+                      - PolicyId: policy-0abc123def456
+                        Description: Daily EBS snapshot policy for production volumes
+                        State: ENABLED
+                        PolicyType: EBS_SNAPSHOT_MANAGEMENT
+                        PolicySummary: Daily backup of production EBS volumes
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      operationId: createLifecyclePolicy
+      summary: Create Lifecycle Policy
+      description: Creates a lifecycle policy to manage the scheduled creation and retention of Amazon EBS snapshots.
+      tags:
+        - Lifecycle Policies
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateLifecyclePolicyRequest'
+            examples:
+              default:
+                x-microcks-default: true
+                value:
+                  Description: Daily EBS snapshot policy for production volumes
+                  State: ENABLED
+                  ExecutionRoleArn: arn:aws:iam::123456789012:role/AWSDataLifecycleManagerDefaultRole
+                  PolicyDetails:
+                    PolicyType: EBS_SNAPSHOT_MANAGEMENT
+                    ResourceTypes:
+                      - VOLUME
+                    TargetTags:
+                      - Key: Environment
+                        Value: Production
+                    Schedules:
+                      - Name: Daily Snapshots
+                        CreateRule:
+                          Interval: 24
+                          IntervalUnit: HOURS
+                          Times:
+                            - '03:00'
+                        RetainRule:
+                          Count: 7
+                        TagsToAdd:
+                          - Key: DLMBackup
+                            Value: 'true'
+      responses:
+        '200':
+          description: Lifecycle policy created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateLifecyclePolicyResponse'
+              examples:
+                default:
+                  x-microcks-default: true
+                  value:
+                    PolicyId: policy-0abc123def456
+
+  /policies/{policyId}:
+    get:
+      operationId: getLifecyclePolicy
+      summary: Get Lifecycle Policy
+      description: Returns the details of the specified lifecycle policy.
+      tags:
+        - Lifecycle Policies
+      parameters:
+        - name: policyId
+          in: path
+          required: true
+          description: The identifier of the lifecycle policy
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Lifecycle policy details returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetLifecyclePolicyResponse'
+              examples:
+                default:
+                  x-microcks-default: true
+                  value:
+                    Policy:
+                      PolicyId: policy-0abc123def456
+                      Description: Daily EBS snapshot policy for production volumes
+                      State: ENABLED
+                      ExecutionRoleArn: arn:aws:iam::123456789012:role/AWSDataLifecycleManagerDefaultRole
+                      DateCreated: '2024-01-15T10:00:00Z'
+                      DateModified: '2024-03-01T12:00:00Z'
+                      PolicyDetails:
+                        PolicyType: EBS_SNAPSHOT_MANAGEMENT
+                        ResourceTypes:
+                          - VOLUME
+                        TargetTags:
+                          - Key: Environment
+                            Value: Production
+                        Schedules:
+                          - Name: Daily Snapshots
+                            CreateRule:
+                              Interval: 24
+                              IntervalUnit: HOURS
+                              Times:
+                                - '03:00'
+                            RetainRule:
+                              Count: 7
+        '404':
+          description: Policy not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    patch:
+      operationId: updateLifecyclePolicy
+      summary: Update Lifecycle Policy
+      description: Updates the specified lifecycle policy.
+      tags:
+        - Lifecycle Policies
+      parameters:
+        - name: policyId
+          in: path
+          required: true
+          description: The identifier of the lifecycle policy to update
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateLifecyclePolicyRequest'
+            examples:
+              default:
+                x-microcks-default: true
+                value:
+                  State: DISABLED
+                  Description: Daily EBS snapshot policy - temporarily disabled
+      responses:
+        '200':
+          description: Lifecycle policy updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateLifecyclePolicyResponse'
+              examples:
+                default:
+                  x-microcks-default: true
+                  value: {}
+        '404':
+          description: Policy not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      operationId: deleteLifecyclePolicy
+      summary: Delete Lifecycle Policy
+      description: Deletes the specified lifecycle policy and halts the automated operations that the policy specified.
+      tags:
+        - Lifecycle Policies
+      parameters:
+        - name: policyId
+          in: path
+          required: true
+          description: The identifier of the lifecycle policy to delete
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Lifecycle policy deleted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteLifecyclePolicyResponse'
+              examples:
+                default:
+                  x-microcks-default: true
+                  value: {}
+        '404':
+          description: Policy not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /tags/{resourceArn}:
+    get:
+      operationId: listTagsForResource
+      summary: List Tags for Resource
+      description: Returns the tags for the specified resource.
+      tags:
+        - Tags
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The ARN of the Data Lifecycle Manager resource. This ARN uniquely identifies the resource.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Tags returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsForResourceResponse'
+              examples:
+                default:
+                  x-microcks-default: true
+                  value:
+                    Tags:
+                      Environment: Production
+                      Team: Operations
+    post:
+      operationId: tagResource
+      summary: Tag Resource
+      description: Adds the specified tags to the specified resource.
+      tags:
+        - Tags
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The ARN of the Data Lifecycle Manager resource. This ARN uniquely identifies the resource.
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TagResourceRequest'
+            examples:
+              default:
+                x-microcks-default: true
+                value:
+                  Tags:
+                    CostCenter: CC-001
+                    Owner: platform-team
+      responses:
+        '200':
+          description: Tags added successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagResourceResponse'
+              examples:
+                default:
+                  x-microcks-default: true
+                  value: {}
+    delete:
+      operationId: untagResource
+      summary: Untag Resource
+      description: Removes the specified tags from the specified resource.
+      tags:
+        - Tags
+      parameters:
+        - name: resourceArn
+          in: path
+          required: true
+          description: The ARN of the Data Lifecycle Manager resource. This ARN uniquely identifies the resource.
+          schema:
+            type: string
+        - name: tagKeys
+          in: query
+          required: true
+          description: The tag keys to remove
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: Tags removed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UntagResourceResponse'
+              examples:
+                default:
+                  x-microcks-default: true
+                  value: {}
+
+components:
+  securitySchemes:
+    awsSignatureV4:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: AWS Signature Version 4 authentication
+
+  schemas:
+    Tag:
+      description: A key-value tag pair applied to an AWS resource.
+      type: object
+      required:
+        - Key
+        - Value
+      properties:
+        Key:
+          type: string
+          description: The tag key
+        Value:
+          type: string
+          description: The tag value
+
+    CreateRule:
+      description: Specifies when and how to create snapshots for event-based policies or schedules.
+      type: object
+      properties:
+        Interval:
+          type: integer
+          description: The interval between snapshots in the schedule
+        IntervalUnit:
+          type: string
+          description: The unit of time for the interval
+          enum: [HOURS]
+        Times:
+          type: array
+          description: The time of day to start the snapshot (in UTC)
+          items:
+            type: string
+        CronExpression:
+          type: string
+          description: The schedule for creating snapshots using a cron expression
+
+    RetainRule:
+      description: Specifies the number of snapshots to keep or the age after which snapshots are deleted.
+      type: object
+      properties:
+        Count:
+          type: integer
+          description: The number of snapshots to retain
+        Interval:
+          type: integer
+          description: The amount of time to retain each snapshot
+        IntervalUnit:
+          type: string
+          description: The unit of time for the retention period
+          enum: [DAYS, WEEKS, MONTHS, YEARS]
+
+    Schedule:
+      description: Specifies the schedule for creating snapshots or AMIs in a lifecycle policy.
+      type: object
+      properties:
+        Name:
+          type: string
+          description: The name of the schedule
+        CreateRule:
+          $ref: '#/components/schemas/CreateRule'
+        RetainRule:
+          $ref: '#/components/schemas/RetainRule'
+        TagsToAdd:
+          type: array
+          description: Tags to add to every snapshot created by the schedule
+          items:
+            $ref: '#/components/schemas/Tag'
+        VariableTags:
+          type: array
+          description: Variable tags for timestamps and intervals on snapshots
+          items:
+            $ref: '#/components/schemas/Tag'
+        CopyTags:
+          type: boolean
+          description: Whether to copy tags from the volume to snapshots
+        FastRestoreRule:
+          type: object
+          description: Configuration for fast snapshot restore
+
+    PolicyDetails:
+      description: Specifies the configuration of a lifecycle policy.
+      type: object
+      properties:
+        PolicyType:
+          type: string
+          description: The type of lifecycle policy
+          enum: [EBS_SNAPSHOT_MANAGEMENT, IMAGE_MANAGEMENT, EVENT_BASED_POLICY]
+        ResourceTypes:
+          type: array
+          description: The type of resource managed by the policy
+          items:
+            type: string
+            enum: [VOLUME, INSTANCE]
+        TargetTags:
+          type: array
+          description: Specifies the volumes or instances to target
+          items:
+            $ref: '#/components/schemas/Tag'
+        Schedules:
+          type: array
+          description: The schedules for creating snapshots or AMIs
+          items:
+            $ref: '#/components/schemas/Schedule'
+        Parameters:
+          type: object
+          description: Additional policy parameters
+
+    LifecyclePolicySummary:
+      description: Summary information about a lifecycle policy.
+      type: object
+      properties:
+        PolicyId:
+          type: string
+          description: The identifier of the lifecycle policy
+        Description:
+          type: string
+          description: The description of the lifecycle policy
+        State:
+          type: string
+          description: The current state of the policy
+          enum: [ENABLED, DISABLED, ERROR]
+        PolicyType:
+          type: string
+          description: The type of lifecycle policy
+        PolicySummary:
+          type: string
+          description: A summary of the policy details
+        Tags:
+          type: object
+          additionalProperties:
+            type: string
+
+    LifecyclePolicy:
+      description: A complete lifecycle policy definition for automating EBS snapshot or AMI management.
+      type: object
+      properties:
+        PolicyId:
+          type: string
+          description: The identifier of the lifecycle policy
+        Description:
+          type: string
+          description: The description of the lifecycle policy
+        State:
+          type: string
+          description: The current state of the policy
+          enum: [ENABLED, DISABLED, ERROR]
+        StatusMessage:
+          type: string
+          description: Status message if the policy is in an error state
+        ExecutionRoleArn:
+          type: string
+          description: The ARN of the IAM role used by DLM to manage the lifecycle policy. This ARN uniquely identifies the role.
+        DateCreated:
+          type: string
+          format: date-time
+          description: When the policy was created
+        DateModified:
+          type: string
+          format: date-time
+          description: When the policy was last modified
+        PolicyDetails:
+          $ref: '#/components/schemas/PolicyDetails'
+        Tags:
+          type: object
+          description: Tags associated with the policy
+          additionalProperties:
+            type: string
+
+    CreateLifecyclePolicyRequest:
+      description: Request body for creating a new lifecycle policy.
+      type: object
+      required:
+        - Description
+        - State
+        - ExecutionRoleArn
+        - PolicyDetails
+      properties:
+        Description:
+          type: string
+          description: A description of the lifecycle policy
+          maxLength: 500
+        State:
+          type: string
+          description: The initial state of the policy
+          enum: [ENABLED, DISABLED]
+        ExecutionRoleArn:
+          type: string
+          description: The ARN of the IAM role for DLM to use when running the lifecycle policy. This ARN uniquely identifies the role.
+        PolicyDetails:
+          $ref: '#/components/schemas/PolicyDetails'
+        Tags:
+          type: object
+          description: Tags to apply to the policy
+          additionalProperties:
+            type: string
+
+    CreateLifecyclePolicyResponse:
+      description: Response after creating a lifecycle policy.
+      type: object
+      properties:
+        PolicyId:
+          type: string
+          description: The identifier of the newly created lifecycle policy
+
+    GetLifecyclePoliciesResponse:
+      description: Response containing a list of lifecycle policy summaries.
+      type: object
+      properties:
+        Policies:
+          type: array
+          items:
+            $ref: '#/components/schemas/LifecyclePolicySummary'
+
+    GetLifecyclePolicyResponse:
+      description: Response containing the details of a lifecycle policy.
+      type: object
+      properties:
+        Policy:
+          $ref: '#/components/schemas/LifecyclePolicy'
+
+    UpdateLifecyclePolicyRequest:
+      description: Request body for updating a lifecycle policy.
+      type: object
+      properties:
+        ExecutionRoleArn:
+          type: string
+          description: The updated ARN of the IAM role. This ARN uniquely identifies the role.
+        State:
+          type: string
+          description: The updated state of the policy
+          enum: [ENABLED, DISABLED]
+        Description:
+          type: string
+          description: The updated description
+        PolicyDetails:
+          $ref: '#/components/schemas/PolicyDetails'
+
+    UpdateLifecyclePolicyResponse:
+      description: Response after updating a lifecycle policy.
+      type: object
+
+    DeleteLifecyclePolicyResponse:
+      description: Response after deleting a lifecycle policy.
+      type: object
+
+    ListTagsForResourceResponse:
+      description: Response containing tags for a resource.
+      type: object
+      properties:
+        Tags:
+          type: object
+          description: The tags associated with the resource
+          additionalProperties:
+            type: string
+
+    TagResourceRequest:
+      description: Request body for adding tags to a resource.
+      type: object
+      required:
+        - Tags
+      properties:
+        Tags:
+          type: object
+          description: The tags to add
+          additionalProperties:
+            type: string
+
+    TagResourceResponse:
+      description: Response after adding tags.
+      type: object
+
+    UntagResourceResponse:
+      description: Response after removing tags.
+      type: object
+
+    Error:
+      description: Standard error response from the Data Lifecycle Manager API.
+      type: object
+      properties:
+        message:
+          type: string
+          description: A human-readable error message
+        code:
+          type: string
+          description: An error code identifying the type of error
+        requestId:
+          type: string
+          description: The unique ID of the request that resulted in this error
