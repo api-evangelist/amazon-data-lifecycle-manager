@@ -1,0 +1,259 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Amazon Data Lifecycle Manager API — Lifecycle Policies
+  description: 'Amazon Data Lifecycle Manager API — Lifecycle Policies. 5 operations. Lead operation: Get Lifecycle Policies.
+    Self-contained Naftiko capability covering one Amazon Data Lifecycle Manager business surface.'
+  tags:
+  - Amazon Data Lifecycle Manager
+  - Lifecycle Policies
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    AMAZON_DATA_LIFECYCLE_MANAGER_API_KEY: AMAZON_DATA_LIFECYCLE_MANAGER_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: amazon-data-lifecycle-manager-lifecycle-policies
+    baseUri: https://dlm.amazonaws.com
+    description: Amazon Data Lifecycle Manager API — Lifecycle Policies business capability. Self-contained, no shared references.
+    resources:
+    - name: policies
+      path: /policies
+      operations:
+      - name: getlifecyclepolicies
+        method: GET
+        description: Get Lifecycle Policies
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: policyIds
+          in: query
+          type: array
+          description: List of policy IDs to filter by
+        - name: state
+          in: query
+          type: string
+          description: Filter by policy state
+        - name: resourceTypes
+          in: query
+          type: array
+          description: Filter by resource type
+        - name: targetTags
+          in: query
+          type: array
+          description: Filter by target tags
+        - name: tagsToAdd
+          in: query
+          type: array
+          description: Filter by tags added to snapshots
+      - name: createlifecyclepolicy
+        method: POST
+        description: Create Lifecycle Policy
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: policies-policyId
+      path: /policies/{policyId}
+      operations:
+      - name: getlifecyclepolicy
+        method: GET
+        description: Get Lifecycle Policy
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: policyId
+          in: path
+          type: string
+          description: The identifier of the lifecycle policy
+          required: true
+      - name: updatelifecyclepolicy
+        method: PATCH
+        description: Update Lifecycle Policy
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: policyId
+          in: path
+          type: string
+          description: The identifier of the lifecycle policy to update
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deletelifecyclepolicy
+        method: DELETE
+        description: Delete Lifecycle Policy
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: policyId
+          in: path
+          type: string
+          description: The identifier of the lifecycle policy to delete
+          required: true
+    authentication:
+      type: apikey
+      key: Authorization
+      value: '{{env.AMAZON_DATA_LIFECYCLE_MANAGER_API_KEY}}'
+      placement: header
+  exposes:
+  - type: rest
+    namespace: amazon-data-lifecycle-manager-lifecycle-policies-rest
+    port: 8080
+    description: REST adapter for Amazon Data Lifecycle Manager API — Lifecycle Policies. One Spectral-compliant resource
+      per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/policies
+      name: policies
+      description: REST surface for policies.
+      operations:
+      - method: GET
+        name: getlifecyclepolicies
+        description: Get Lifecycle Policies
+        call: amazon-data-lifecycle-manager-lifecycle-policies.getlifecyclepolicies
+        with:
+          policyIds: rest.policyIds
+          state: rest.state
+          resourceTypes: rest.resourceTypes
+          targetTags: rest.targetTags
+          tagsToAdd: rest.tagsToAdd
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createlifecyclepolicy
+        description: Create Lifecycle Policy
+        call: amazon-data-lifecycle-manager-lifecycle-policies.createlifecyclepolicy
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/policies/{policyid}
+      name: policies-policyid
+      description: REST surface for policies-policyId.
+      operations:
+      - method: GET
+        name: getlifecyclepolicy
+        description: Get Lifecycle Policy
+        call: amazon-data-lifecycle-manager-lifecycle-policies.getlifecyclepolicy
+        with:
+          policyId: rest.policyId
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updatelifecyclepolicy
+        description: Update Lifecycle Policy
+        call: amazon-data-lifecycle-manager-lifecycle-policies.updatelifecyclepolicy
+        with:
+          policyId: rest.policyId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deletelifecyclepolicy
+        description: Delete Lifecycle Policy
+        call: amazon-data-lifecycle-manager-lifecycle-policies.deletelifecyclepolicy
+        with:
+          policyId: rest.policyId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: amazon-data-lifecycle-manager-lifecycle-policies-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Amazon Data Lifecycle Manager API — Lifecycle Policies. One tool per consumed operation,
+      routed inline through this capability's consumes block.
+    tools:
+    - name: get-lifecycle-policies
+      description: Get Lifecycle Policies
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: amazon-data-lifecycle-manager-lifecycle-policies.getlifecyclepolicies
+      with:
+        policyIds: tools.policyIds
+        state: tools.state
+        resourceTypes: tools.resourceTypes
+        targetTags: tools.targetTags
+        tagsToAdd: tools.tagsToAdd
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-lifecycle-policy
+      description: Create Lifecycle Policy
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: amazon-data-lifecycle-manager-lifecycle-policies.createlifecyclepolicy
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-lifecycle-policy
+      description: Get Lifecycle Policy
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: amazon-data-lifecycle-manager-lifecycle-policies.getlifecyclepolicy
+      with:
+        policyId: tools.policyId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-lifecycle-policy
+      description: Update Lifecycle Policy
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: amazon-data-lifecycle-manager-lifecycle-policies.updatelifecyclepolicy
+      with:
+        policyId: tools.policyId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-lifecycle-policy
+      description: Delete Lifecycle Policy
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: amazon-data-lifecycle-manager-lifecycle-policies.deletelifecyclepolicy
+      with:
+        policyId: tools.policyId
+      outputParameters:
+      - type: object
+        mapping: $.
