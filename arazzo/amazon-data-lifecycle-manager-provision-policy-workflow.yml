@@ -1,0 +1,116 @@
+arazzo: 1.0.1
+info:
+  title: Amazon Data Lifecycle Manager Provision Policy
+  summary: Create an EBS snapshot lifecycle policy, read it back, and confirm it in the policy list.
+  description: >-
+    Stands up a new Amazon Data Lifecycle Manager policy end to end. The workflow
+    creates a lifecycle policy for automating EBS snapshot creation and retention,
+    fetches the freshly created policy by its returned identifier to confirm the
+    stored configuration, and then lists the account's policies filtered to the
+    same state to verify the new policy is enrolled and active. Every step spells
+    out its request inline so the flow can be read and executed without opening
+    the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: dlmApi
+  url: ../openapi/amazon-data-lifecycle-manager-openapi.yml
+  type: openapi
+workflows:
+- workflowId: provision-policy
+  summary: Create a lifecycle policy and verify it via get and list.
+  description: >-
+    Creates an EBS snapshot management policy, retrieves the created policy by id
+    to confirm its persisted details, and lists policies in the same state to
+    confirm the policy is registered.
+  inputs:
+    type: object
+    required:
+    - description
+    - executionRoleArn
+    properties:
+      description:
+        type: string
+        description: A human-readable description of the lifecycle policy.
+      executionRoleArn:
+        type: string
+        description: The ARN of the IAM role DLM assumes when running the policy.
+      targetTagKey:
+        type: string
+        description: The tag key identifying the volumes the policy targets.
+        default: Environment
+      targetTagValue:
+        type: string
+        description: The tag value identifying the volumes the policy targets.
+        default: Production
+      snapshotTime:
+        type: string
+        description: The UTC time of day to start the daily snapshot.
+        default: '03:00'
+      retainCount:
+        type: integer
+        description: The number of snapshots to retain on the schedule.
+        default: 7
+  steps:
+  - stepId: createPolicy
+    description: >-
+      Create a new EBS snapshot management lifecycle policy that takes a daily
+      snapshot of the targeted volumes and retains the configured number.
+    operationId: createLifecyclePolicy
+    requestBody:
+      contentType: application/json
+      payload:
+        Description: $inputs.description
+        State: ENABLED
+        ExecutionRoleArn: $inputs.executionRoleArn
+        PolicyDetails:
+          PolicyType: EBS_SNAPSHOT_MANAGEMENT
+          ResourceTypes:
+          - VOLUME
+          TargetTags:
+          - Key: $inputs.targetTagKey
+            Value: $inputs.targetTagValue
+          Schedules:
+          - Name: Daily Snapshots
+            CreateRule:
+              Interval: 24
+              IntervalUnit: HOURS
+              Times:
+              - $inputs.snapshotTime
+            RetainRule:
+              Count: $inputs.retainCount
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      policyId: $response.body#/PolicyId
+  - stepId: getPolicy
+    description: >-
+      Read the newly created policy back by its identifier to confirm the stored
+      state and policy details.
+    operationId: getLifecyclePolicy
+    parameters:
+    - name: policyId
+      in: path
+      value: $steps.createPolicy.outputs.policyId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      policyId: $response.body#/Policy/PolicyId
+      state: $response.body#/Policy/State
+      dateCreated: $response.body#/Policy/DateCreated
+  - stepId: listEnabledPolicies
+    description: >-
+      List the account's lifecycle policies filtered to the ENABLED state to
+      confirm the new policy is enrolled and active.
+    operationId: getLifecyclePolicies
+    parameters:
+    - name: state
+      in: query
+      value: ENABLED
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      policies: $response.body#/Policies
+  outputs:
+    policyId: $steps.getPolicy.outputs.policyId
+    state: $steps.getPolicy.outputs.state
+    policies: $steps.listEnabledPolicies.outputs.policies

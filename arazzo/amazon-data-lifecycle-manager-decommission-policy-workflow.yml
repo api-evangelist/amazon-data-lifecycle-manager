@@ -1,0 +1,71 @@
+arazzo: 1.0.1
+info:
+  title: Amazon Data Lifecycle Manager Decommission Policy
+  summary: Retrieve a lifecycle policy, delete it, and confirm it no longer appears in the list.
+  description: >-
+    Safely retires a lifecycle policy and the automated operations it drives. The
+    workflow first reads the policy by its identifier to capture its details for
+    auditing, deletes the policy to halt its scheduled snapshot operations, and
+    then lists the account's policies so the caller can confirm the policy is no
+    longer enrolled. Every step spells out its request inline so the flow can be
+    read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: dlmApi
+  url: ../openapi/amazon-data-lifecycle-manager-openapi.yml
+  type: openapi
+workflows:
+- workflowId: decommission-policy
+  summary: Audit, delete, and verify removal of a lifecycle policy.
+  description: >-
+    Retrieves the target policy for an audit record, deletes it to halt its
+    operations, and lists policies to confirm it is gone.
+  inputs:
+    type: object
+    required:
+    - policyId
+    properties:
+      policyId:
+        type: string
+        description: The identifier of the lifecycle policy to decommission.
+  steps:
+  - stepId: auditPolicy
+    description: >-
+      Read the policy by its identifier to capture its details for an audit
+      record before deletion.
+    operationId: getLifecyclePolicy
+    parameters:
+    - name: policyId
+      in: path
+      value: $inputs.policyId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      policyId: $response.body#/Policy/PolicyId
+      description: $response.body#/Policy/Description
+      state: $response.body#/Policy/State
+  - stepId: deletePolicy
+    description: >-
+      Delete the lifecycle policy, halting the automated snapshot operations it
+      specified.
+    operationId: deleteLifecyclePolicy
+    parameters:
+    - name: policyId
+      in: path
+      value: $inputs.policyId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      statusCode: $statusCode
+  - stepId: confirmGone
+    description: >-
+      List the account's lifecycle policies so the caller can confirm the deleted
+      policy no longer appears.
+    operationId: getLifecyclePolicies
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      policies: $response.body#/Policies
+  outputs:
+    deletedPolicyId: $steps.auditPolicy.outputs.policyId
+    policies: $steps.confirmGone.outputs.policies

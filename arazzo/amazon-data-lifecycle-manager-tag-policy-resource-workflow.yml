@@ -1,0 +1,66 @@
+arazzo: 1.0.1
+info:
+  title: Amazon Data Lifecycle Manager Tag Policy Resource
+  summary: Add tags to a DLM resource and confirm them by listing the resource's tags.
+  description: >-
+    Applies governance metadata to an Amazon Data Lifecycle Manager resource. The
+    workflow adds the supplied key-value tags to the resource identified by its
+    ARN, then lists the tags on that same resource to confirm the new tags were
+    stored. Every step spells out its request inline so the flow can be read and
+    executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: dlmApi
+  url: ../openapi/amazon-data-lifecycle-manager-openapi.yml
+  type: openapi
+workflows:
+- workflowId: tag-policy-resource
+  summary: Tag a DLM resource and verify the tags via a list.
+  description: >-
+    Adds the provided tags to the resource identified by its ARN and then reads
+    the resource's tags back to confirm they were applied.
+  inputs:
+    type: object
+    required:
+    - resourceArn
+    - tags
+    properties:
+      resourceArn:
+        type: string
+        description: The ARN of the Data Lifecycle Manager resource to tag.
+      tags:
+        type: object
+        description: The map of tag key/value pairs to add to the resource.
+        additionalProperties:
+          type: string
+  steps:
+  - stepId: addTags
+    description: >-
+      Add the supplied tags to the resource identified by its ARN.
+    operationId: tagResource
+    parameters:
+    - name: resourceArn
+      in: path
+      value: $inputs.resourceArn
+    requestBody:
+      contentType: application/json
+      payload:
+        Tags: $inputs.tags
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      statusCode: $statusCode
+  - stepId: confirmTags
+    description: >-
+      List the tags on the resource to confirm the newly added tags are present.
+    operationId: listTagsForResource
+    parameters:
+    - name: resourceArn
+      in: path
+      value: $inputs.resourceArn
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      tags: $response.body#/Tags
+  outputs:
+    tags: $steps.confirmTags.outputs.tags

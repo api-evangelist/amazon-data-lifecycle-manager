@@ -1,0 +1,133 @@
+arazzo: 1.0.1
+info:
+  title: Amazon Data Lifecycle Manager Reconfigure Schedule
+  summary: Read a policy, re-enable and rewrite its snapshot schedule, then confirm the change.
+  description: >-
+    Adjusts the snapshot cadence and retention of an existing lifecycle policy.
+    The workflow first reads the current policy to confirm it exists, branches on
+    whether the policy is already ENABLED, patches the policy with a rewritten
+    snapshot schedule and ENABLED state, and finally re-reads the policy to
+    confirm the new schedule and state were persisted. Every step spells out its
+    request inline so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: dlmApi
+  url: ../openapi/amazon-data-lifecycle-manager-openapi.yml
+  type: openapi
+workflows:
+- workflowId: reconfigure-schedule
+  summary: Rewrite a policy's snapshot schedule and verify the update.
+  description: >-
+    Reads the current policy, patches its PolicyDetails with a new snapshot
+    schedule and ENABLED state, and re-reads the policy to confirm the change.
+  inputs:
+    type: object
+    required:
+    - policyId
+    - targetTagKey
+    - targetTagValue
+    properties:
+      policyId:
+        type: string
+        description: The identifier of the lifecycle policy to reconfigure.
+      targetTagKey:
+        type: string
+        description: The tag key identifying the volumes the policy targets.
+      targetTagValue:
+        type: string
+        description: The tag value identifying the volumes the policy targets.
+      intervalHours:
+        type: integer
+        description: The number of hours between scheduled snapshots.
+        default: 12
+      snapshotTime:
+        type: string
+        description: The UTC time of day to start the snapshot.
+        default: '02:00'
+      retainCount:
+        type: integer
+        description: The number of snapshots to retain on the schedule.
+        default: 14
+  steps:
+  - stepId: readCurrent
+    description: >-
+      Read the current policy by its identifier to confirm it exists and capture
+      its present state.
+    operationId: getLifecyclePolicy
+    parameters:
+    - name: policyId
+      in: path
+      value: $inputs.policyId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      state: $response.body#/Policy/State
+    onSuccess:
+    - name: alreadyEnabled
+      type: goto
+      stepId: applySchedule
+      criteria:
+      - context: $response.body
+        condition: $.Policy.State == "ENABLED"
+        type: jsonpath
+    - name: needsEnable
+      type: goto
+      stepId: applySchedule
+      criteria:
+      - context: $response.body
+        condition: $.Policy.State != "ENABLED"
+        type: jsonpath
+  - stepId: applySchedule
+    description: >-
+      Patch the policy with a rewritten EBS snapshot schedule and ensure the
+      policy is set to the ENABLED state so the new schedule takes effect.
+    operationId: updateLifecyclePolicy
+    parameters:
+    - name: policyId
+      in: path
+      value: $inputs.policyId
+    requestBody:
+      contentType: application/json
+      payload:
+        State: ENABLED
+        PolicyDetails:
+          PolicyType: EBS_SNAPSHOT_MANAGEMENT
+          ResourceTypes:
+          - VOLUME
+          TargetTags:
+          - Key: $inputs.targetTagKey
+            Value: $inputs.targetTagValue
+          Schedules:
+          - Name: Reconfigured Schedule
+            CreateRule:
+              Interval: $inputs.intervalHours
+              IntervalUnit: HOURS
+              Times:
+              - $inputs.snapshotTime
+            RetainRule:
+              Count: $inputs.retainCount
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      statusCode: $statusCode
+  - stepId: confirmSchedule
+    description: >-
+      Re-read the policy to confirm the ENABLED state and the rewritten schedule
+      were persisted.
+    operationId: getLifecyclePolicy
+    parameters:
+    - name: policyId
+      in: path
+      value: $inputs.policyId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      policyId: $response.body#/Policy/PolicyId
+      state: $response.body#/Policy/State
+      policyDetails: $response.body#/Policy/PolicyDetails
+      dateModified: $response.body#/Policy/DateModified
+  outputs:
+    policyId: $steps.confirmSchedule.outputs.policyId
+    state: $steps.confirmSchedule.outputs.state
+    policyDetails: $steps.confirmSchedule.outputs.policyDetails

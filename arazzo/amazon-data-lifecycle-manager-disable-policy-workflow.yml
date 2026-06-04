@@ -1,0 +1,72 @@
+arazzo: 1.0.1
+info:
+  title: Amazon Data Lifecycle Manager Disable Policy
+  summary: Disable a lifecycle policy and confirm the state change by reading it back.
+  description: >-
+    Temporarily halts the automated operations of a lifecycle policy without
+    deleting it. The workflow patches the policy to the DISABLED state with an
+    updated description recording why it was paused, then re-reads the policy by
+    its identifier to confirm the state transition persisted. Every step spells
+    out its request inline so the flow can be read and executed without opening
+    the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: dlmApi
+  url: ../openapi/amazon-data-lifecycle-manager-openapi.yml
+  type: openapi
+workflows:
+- workflowId: disable-policy
+  summary: Update a lifecycle policy to DISABLED and verify with a get.
+  description: >-
+    Patches the target policy to the DISABLED state with an explanatory
+    description and then retrieves it to confirm the new state.
+  inputs:
+    type: object
+    required:
+    - policyId
+    properties:
+      policyId:
+        type: string
+        description: The identifier of the lifecycle policy to disable.
+      reason:
+        type: string
+        description: A description explaining why the policy was disabled.
+        default: Temporarily disabled for maintenance
+  steps:
+  - stepId: disablePolicy
+    description: >-
+      Patch the lifecycle policy to the DISABLED state, halting its scheduled
+      snapshot operations, and record the reason in the description.
+    operationId: updateLifecyclePolicy
+    parameters:
+    - name: policyId
+      in: path
+      value: $inputs.policyId
+    requestBody:
+      contentType: application/json
+      payload:
+        State: DISABLED
+        Description: $inputs.reason
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      statusCode: $statusCode
+  - stepId: confirmDisabled
+    description: >-
+      Read the policy back by its identifier to confirm the State now reflects
+      the DISABLED value.
+    operationId: getLifecyclePolicy
+    parameters:
+    - name: policyId
+      in: path
+      value: $inputs.policyId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      policyId: $response.body#/Policy/PolicyId
+      state: $response.body#/Policy/State
+      dateModified: $response.body#/Policy/DateModified
+  outputs:
+    policyId: $steps.confirmDisabled.outputs.policyId
+    state: $steps.confirmDisabled.outputs.state
+    dateModified: $steps.confirmDisabled.outputs.dateModified

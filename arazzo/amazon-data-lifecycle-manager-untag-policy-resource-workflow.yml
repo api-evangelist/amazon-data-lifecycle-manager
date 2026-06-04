@@ -1,0 +1,66 @@
+arazzo: 1.0.1
+info:
+  title: Amazon Data Lifecycle Manager Untag Policy Resource
+  summary: Remove tags from a DLM resource and confirm removal by listing the resource's tags.
+  description: >-
+    Strips governance metadata from an Amazon Data Lifecycle Manager resource. The
+    workflow removes the supplied tag keys from the resource identified by its
+    ARN, then lists the tags on that same resource so the caller can confirm the
+    keys are gone. Every step spells out its request inline so the flow can be
+    read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: dlmApi
+  url: ../openapi/amazon-data-lifecycle-manager-openapi.yml
+  type: openapi
+workflows:
+- workflowId: untag-policy-resource
+  summary: Remove tags from a DLM resource and verify via a list.
+  description: >-
+    Removes the provided tag keys from the resource identified by its ARN and
+    then reads the resource's tags back to confirm they were removed.
+  inputs:
+    type: object
+    required:
+    - resourceArn
+    - tagKeys
+    properties:
+      resourceArn:
+        type: string
+        description: The ARN of the Data Lifecycle Manager resource to untag.
+      tagKeys:
+        type: array
+        description: The list of tag keys to remove from the resource.
+        items:
+          type: string
+  steps:
+  - stepId: removeTags
+    description: >-
+      Remove the supplied tag keys from the resource identified by its ARN.
+    operationId: untagResource
+    parameters:
+    - name: resourceArn
+      in: path
+      value: $inputs.resourceArn
+    - name: tagKeys
+      in: query
+      value: $inputs.tagKeys
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      statusCode: $statusCode
+  - stepId: confirmRemoval
+    description: >-
+      List the remaining tags on the resource so the caller can confirm the
+      removed keys are no longer present.
+    operationId: listTagsForResource
+    parameters:
+    - name: resourceArn
+      in: path
+      value: $inputs.resourceArn
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      tags: $response.body#/Tags
+  outputs:
+    tags: $steps.confirmRemoval.outputs.tags
