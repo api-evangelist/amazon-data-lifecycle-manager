@@ -1,0 +1,220 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Amazon Data Lifecycle Manager API",
+    "version": "Thu Jan 11 2018 19:00:00 GMT-0500 (Eastern Standard Time)"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Lifecycle Policies",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Lifecycle Policies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dlm.amazonaws.com/policies",
+            "params": [
+              {
+                "name": "policyIds",
+                "value": "",
+                "type": "query",
+                "description": "List of policy IDs to filter by"
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "Filter by policy state"
+              },
+              {
+                "name": "resourceTypes",
+                "value": "",
+                "type": "query",
+                "description": "Filter by resource type"
+              },
+              {
+                "name": "targetTags",
+                "value": "",
+                "type": "query",
+                "description": "Filter by target tags"
+              },
+              {
+                "name": "tagsToAdd",
+                "value": "",
+                "type": "query",
+                "description": "Filter by tags added to snapshots"
+              }
+            ]
+          },
+          "docs": "Returns a list of lifecycle policies based on the specified filters."
+        },
+        {
+          "info": {
+            "name": "Create Lifecycle Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://dlm.amazonaws.com/policies",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a lifecycle policy to manage the scheduled creation and retention of Amazon EBS snapshots."
+        },
+        {
+          "info": {
+            "name": "Get Lifecycle Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dlm.amazonaws.com/policies/:policyId",
+            "params": [
+              {
+                "name": "policyId",
+                "value": "",
+                "type": "path",
+                "description": "The identifier of the lifecycle policy"
+              }
+            ]
+          },
+          "docs": "Returns the details of the specified lifecycle policy."
+        },
+        {
+          "info": {
+            "name": "Update Lifecycle Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://dlm.amazonaws.com/policies/:policyId",
+            "params": [
+              {
+                "name": "policyId",
+                "value": "",
+                "type": "path",
+                "description": "The identifier of the lifecycle policy to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the specified lifecycle policy."
+        },
+        {
+          "info": {
+            "name": "Delete Lifecycle Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://dlm.amazonaws.com/policies/:policyId",
+            "params": [
+              {
+                "name": "policyId",
+                "value": "",
+                "type": "path",
+                "description": "The identifier of the lifecycle policy to delete"
+              }
+            ]
+          },
+          "docs": "Deletes the specified lifecycle policy and halts the automated operations that the policy specified."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Tags",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Tags for Resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://dlm.amazonaws.com/tags/:resourceArn",
+            "params": [
+              {
+                "name": "resourceArn",
+                "value": "",
+                "type": "path",
+                "description": "The ARN of the Data Lifecycle Manager resource. This ARN uniquely identifies the resource."
+              }
+            ]
+          },
+          "docs": "Returns the tags for the specified resource."
+        },
+        {
+          "info": {
+            "name": "Tag Resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://dlm.amazonaws.com/tags/:resourceArn",
+            "params": [
+              {
+                "name": "resourceArn",
+                "value": "",
+                "type": "path",
+                "description": "The ARN of the Data Lifecycle Manager resource. This ARN uniquely identifies the resource."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds the specified tags to the specified resource."
+        },
+        {
+          "info": {
+            "name": "Untag Resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://dlm.amazonaws.com/tags/:resourceArn",
+            "params": [
+              {
+                "name": "resourceArn",
+                "value": "",
+                "type": "path",
+                "description": "The ARN of the Data Lifecycle Manager resource. This ARN uniquely identifies the resource."
+              },
+              {
+                "name": "tagKeys",
+                "value": "",
+                "type": "query",
+                "description": "The tag keys to remove"
+              }
+            ]
+          },
+          "docs": "Removes the specified tags from the specified resource."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

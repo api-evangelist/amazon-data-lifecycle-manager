@@ -1,0 +1,1213 @@
+{
+  "item": [
+    {
+      "id": "8c8ff307-a952-4c0d-a980-c05b4bdd4127",
+      "name": "Lifecycle Policies",
+      "description": {
+        "content": "Operations for managing EBS snapshot and AMI lifecycle policies",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fb4c6e40-e6c6-4b79-8aaa-f05d8e8fe714",
+          "name": "Get Lifecycle Policies",
+          "request": {
+            "name": "Get Lifecycle Policies",
+            "description": {
+              "content": "Returns a list of lifecycle policies based on the specified filters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "policies"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "policyIds",
+                  "value": "<string>",
+                  "description": "List of policy IDs to filter by"
+                },
+                {
+                  "disabled": false,
+                  "key": "policyIds",
+                  "value": "<string>",
+                  "description": "List of policy IDs to filter by"
+                },
+                {
+                  "disabled": false,
+                  "key": "state",
+                  "value": "<string>",
+                  "description": "Filter by policy state"
+                },
+                {
+                  "disabled": false,
+                  "key": "resourceTypes",
+                  "value": "<string>",
+                  "description": "Filter by resource type"
+                },
+                {
+                  "disabled": false,
+                  "key": "resourceTypes",
+                  "value": "<string>",
+                  "description": "Filter by resource type"
+                },
+                {
+                  "disabled": false,
+                  "key": "targetTags",
+                  "value": "<string>",
+                  "description": "Filter by target tags"
+                },
+                {
+                  "disabled": false,
+                  "key": "targetTags",
+                  "value": "<string>",
+                  "description": "Filter by target tags"
+                },
+                {
+                  "disabled": false,
+                  "key": "tagsToAdd",
+                  "value": "<string>",
+                  "description": "Filter by tags added to snapshots"
+                },
+                {
+                  "disabled": false,
+                  "key": "tagsToAdd",
+                  "value": "<string>",
+                  "description": "Filter by tags added to snapshots"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b4d2de33-b699-4844-a8fe-5d70dc32dc25",
+              "name": "List of lifecycle policies returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "policies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "policyIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "policyIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "resourceTypes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "resourceTypes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "targetTags",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "targetTags",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tagsToAdd",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tagsToAdd",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Policies\": [\n    {\n      \"PolicyId\": \"policy-0abc123def456\",\n      \"Description\": \"Daily EBS snapshot policy for production volumes\",\n      \"State\": \"ENABLED\",\n      \"PolicyType\": \"EBS_SNAPSHOT_MANAGEMENT\",\n      \"PolicySummary\": \"Daily backup of production EBS volumes\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "71df952c-88c8-48dd-8cd2-bb4a380abf1b",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "policies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "policyIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "policyIds",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "resourceTypes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "resourceTypes",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "targetTags",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "targetTags",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tagsToAdd",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tagsToAdd",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\",\n  \"requestId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2bea41c9-8419-4c4a-bec2-51f4da9ce927",
+          "name": "Create Lifecycle Policy",
+          "request": {
+            "name": "Create Lifecycle Policy",
+            "description": {
+              "content": "Creates a lifecycle policy to manage the scheduled creation and retention of Amazon EBS snapshots.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "policies"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Description\": \"<string>\",\n  \"State\": \"<string>\",\n  \"ExecutionRoleArn\": \"<string>\",\n  \"PolicyDetails\": {\n    \"PolicyType\": \"<string>\",\n    \"ResourceTypes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"TargetTags\": [\n      {\n        \"Key\": \"<string>\",\n        \"Value\": \"<string>\"\n      },\n      {\n        \"Key\": \"<string>\",\n        \"Value\": \"<string>\"\n      }\n    ],\n    \"Schedules\": [\n      {\n        \"Name\": \"<string>\",\n        \"CreateRule\": {\n          \"Interval\": \"<integer>\",\n          \"IntervalUnit\": \"<string>\",\n          \"Times\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"CronExpression\": \"<string>\"\n        },\n        \"RetainRule\": {\n          \"Count\": \"<integer>\",\n          \"Interval\": \"<integer>\",\n          \"IntervalUnit\": \"<string>\"\n        },\n        \"TagsToAdd\": [\n          {\n            \"Key\": \"<string>\",\n            \"Value\": \"<string>\"\n          },\n          {\n            \"Key\": \"<string>\",\n            \"Value\": \"<string>\"\n          }\n        ],\n        \"VariableTags\": [\n          {\n            \"Key\": \"<string>\",\n            \"Value\": \"<string>\"\n          },\n          {\n            \"Key\": \"<string>\",\n            \"Value\": \"<string>\"\n          }\n        ],\n        \"CopyTags\": \"<boolean>\",\n        \"FastRestoreRule\": \"<object>\"\n      },\n      {\n        \"Name\": \"<string>\",\n        \"CreateRule\": {\n          \"Interval\": \"<integer>\",\n          \"IntervalUnit\": \"<string>\",\n          \"Times\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"CronExpression\": \"<string>\"\n        },\n        \"RetainRule\": {\n          \"Count\": \"<integer>\",\n          \"Interval\": \"<integer>\",\n          \"IntervalUnit\": \"<string>\"\n        },\n        \"TagsToAdd\": [\n          {\n            \"Key\": \"<string>\",\n            \"Value\": \"<string>\"\n          },\n          {\n            \"Key\": \"<string>\",\n            \"Value\": \"<string>\"\n          }\n        ],\n        \"VariableTags\": [\n          {\n            \"Key\": \"<string>\",\n            \"Value\": \"<string>\"\n          },\n          {\n            \"Key\": \"<string>\",\n            \"Value\": \"<string>\"\n          }\n        ],\n        \"CopyTags\": \"<boolean>\",\n        \"FastRestoreRule\": \"<object>\"\n      }\n    ],\n    \"Parameters\": \"<object>\"\n  },\n  \"Tags\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\",\n    \"key_3\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "79650401-5ea2-48f5-a47a-b7b7abe0dc43",
+              "name": "Lifecycle policy created successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "policies"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Description\": \"Daily EBS snapshot policy for production volumes\",\n  \"State\": \"ENABLED\",\n  \"ExecutionRoleArn\": \"arn:aws:iam::123456789012:role/AWSDataLifecycleManagerDefaultRole\",\n  \"PolicyDetails\": {\n    \"PolicyType\": \"EBS_SNAPSHOT_MANAGEMENT\",\n    \"ResourceTypes\": [\n      \"VOLUME\"\n    ],\n    \"TargetTags\": [\n      {\n        \"Key\": \"Environment\",\n        \"Value\": \"Production\"\n      }\n    ],\n    \"Schedules\": [\n      {\n        \"Name\": \"Daily Snapshots\",\n        \"CreateRule\": {\n          \"Interval\": 24,\n          \"IntervalUnit\": \"HOURS\",\n          \"Times\": [\n            \"03:00\"\n          ]\n        },\n        \"RetainRule\": {\n          \"Count\": 7\n        },\n        \"TagsToAdd\": [\n          {\n            \"Key\": \"DLMBackup\",\n            \"Value\": \"true\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"PolicyId\": \"policy-0abc123def456\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c53c0f3f-68ed-4a58-8d1b-73faad0e67f7",
+          "name": "Get Lifecycle Policy",
+          "request": {
+            "name": "Get Lifecycle Policy",
+            "description": {
+              "content": "Returns the details of the specified lifecycle policy.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "policies",
+                ":policyId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "policyId",
+                  "description": "(Required) The identifier of the lifecycle policy"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b5353e2e-f274-4edb-aad8-92cf08e05551",
+              "name": "Lifecycle policy details returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "policies",
+                    ":policyId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "policyId",
+                      "description": "(Required) The identifier of the lifecycle policy"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Policy\": {\n    \"PolicyId\": \"policy-0abc123def456\",\n    \"Description\": \"Daily EBS snapshot policy for production volumes\",\n    \"State\": \"ENABLED\",\n    \"ExecutionRoleArn\": \"arn:aws:iam::123456789012:role/AWSDataLifecycleManagerDefaultRole\",\n    \"DateCreated\": \"2024-01-15T10:00:00Z\",\n    \"DateModified\": \"2024-03-01T12:00:00Z\",\n    \"PolicyDetails\": {\n      \"PolicyType\": \"EBS_SNAPSHOT_MANAGEMENT\",\n      \"ResourceTypes\": [\n        \"VOLUME\"\n      ],\n      \"TargetTags\": [\n        {\n          \"Key\": \"Environment\",\n          \"Value\": \"Production\"\n        }\n      ],\n      \"Schedules\": [\n        {\n          \"Name\": \"Daily Snapshots\",\n          \"CreateRule\": {\n            \"Interval\": 24,\n            \"IntervalUnit\": \"HOURS\",\n            \"Times\": [\n              \"03:00\"\n            ]\n          },\n          \"RetainRule\": {\n            \"Count\": 7\n          }\n        }\n      ]\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e349ce30-17c8-483b-ad9a-dc23bc6805eb",
+              "name": "Policy not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "policies",
+                    ":policyId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "policyId",
+                      "description": "(Required) The identifier of the lifecycle policy"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\",\n  \"requestId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "101e3680-b95d-4e66-920e-588b8db5e69f",
+          "name": "Update Lifecycle Policy",
+          "request": {
+            "name": "Update Lifecycle Policy",
+            "description": {
+              "content": "Updates the specified lifecycle policy.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "policies",
+                ":policyId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "policyId",
+                  "description": "(Required) The identifier of the lifecycle policy to update"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ExecutionRoleArn\": \"<string>\",\n  \"State\": \"<string>\",\n  \"Description\": \"<string>\",\n  \"PolicyDetails\": {\n    \"PolicyType\": \"<string>\",\n    \"ResourceTypes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"TargetTags\": [\n      {\n        \"Key\": \"<string>\",\n        \"Value\": \"<string>\"\n      },\n      {\n        \"Key\": \"<string>\",\n        \"Value\": \"<string>\"\n      }\n    ],\n    \"Schedules\": [\n      {\n        \"Name\": \"<string>\",\n        \"CreateRule\": {\n          \"Interval\": \"<integer>\",\n          \"IntervalUnit\": \"<string>\",\n          \"Times\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"CronExpression\": \"<string>\"\n        },\n        \"RetainRule\": {\n          \"Count\": \"<integer>\",\n          \"Interval\": \"<integer>\",\n          \"IntervalUnit\": \"<string>\"\n        },\n        \"TagsToAdd\": [\n          {\n            \"Key\": \"<string>\",\n            \"Value\": \"<string>\"\n          },\n          {\n            \"Key\": \"<string>\",\n            \"Value\": \"<string>\"\n          }\n        ],\n        \"VariableTags\": [\n          {\n            \"Key\": \"<string>\",\n            \"Value\": \"<string>\"\n          },\n          {\n            \"Key\": \"<string>\",\n            \"Value\": \"<string>\"\n          }\n        ],\n        \"CopyTags\": \"<boolean>\",\n        \"FastRestoreRule\": \"<object>\"\n      },\n      {\n        \"Name\": \"<string>\",\n        \"CreateRule\": {\n          \"Interval\": \"<integer>\",\n          \"IntervalUnit\": \"<string>\",\n          \"Times\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"CronExpression\": \"<string>\"\n        },\n        \"RetainRule\": {\n          \"Count\": \"<integer>\",\n          \"Interval\": \"<integer>\",\n          \"IntervalUnit\": \"<string>\"\n        },\n        \"TagsToAdd\": [\n          {\n            \"Key\": \"<string>\",\n            \"Value\": \"<string>\"\n          },\n          {\n            \"Key\": \"<string>\",\n            \"Value\": \"<string>\"\n          }\n        ],\n        \"VariableTags\": [\n          {\n            \"Key\": \"<string>\",\n            \"Value\": \"<string>\"\n          },\n          {\n            \"Key\": \"<string>\",\n            \"Value\": \"<string>\"\n          }\n        ],\n        \"CopyTags\": \"<boolean>\",\n        \"FastRestoreRule\": \"<object>\"\n      }\n    ],\n    \"Parameters\": \"<object>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b04f6801-4a8a-4bab-b22e-cff82b1f5365",
+              "name": "Lifecycle policy updated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "policies",
+                    ":policyId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "policyId",
+                      "description": "(Required) The identifier of the lifecycle policy to update"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"State\": \"DISABLED\",\n  \"Description\": \"Daily EBS snapshot policy - temporarily disabled\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7264f912-5209-472d-828f-ed7db4b6bfc4",
+              "name": "Policy not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "policies",
+                    ":policyId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "policyId",
+                      "description": "(Required) The identifier of the lifecycle policy to update"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"State\": \"DISABLED\",\n  \"Description\": \"Daily EBS snapshot policy - temporarily disabled\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\",\n  \"requestId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "29bf059d-18fd-4ca6-9d14-8aa90f693889",
+          "name": "Delete Lifecycle Policy",
+          "request": {
+            "name": "Delete Lifecycle Policy",
+            "description": {
+              "content": "Deletes the specified lifecycle policy and halts the automated operations that the policy specified.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "policies",
+                ":policyId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "policyId",
+                  "description": "(Required) The identifier of the lifecycle policy to delete"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e332017d-7d92-4c35-8055-dbb0f2568935",
+              "name": "Lifecycle policy deleted successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "policies",
+                    ":policyId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "policyId",
+                      "description": "(Required) The identifier of the lifecycle policy to delete"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a2047f36-8f73-4ed9-a86c-a0aa693a1e52",
+              "name": "Policy not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "policies",
+                    ":policyId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "policyId",
+                      "description": "(Required) The identifier of the lifecycle policy to delete"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\",\n  \"code\": \"string\",\n  \"requestId\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "cf6c88f8-b55f-4149-b4e3-ef2c3fccff3b",
+      "name": "Tags",
+      "description": {
+        "content": "Operations for managing resource tags",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "59c9d91e-3762-421c-ad64-cce0261cc852",
+          "name": "List Tags for Resource",
+          "request": {
+            "name": "List Tags for Resource",
+            "description": {
+              "content": "Returns the tags for the specified resource.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tags",
+                ":resourceArn"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "resourceArn",
+                  "description": "(Required) The ARN of the Data Lifecycle Manager resource. This ARN uniquely identifies the resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "480498e1-bc97-4cd4-b26c-beeef7525cba",
+              "name": "Tags returned successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tags",
+                    ":resourceArn"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "resourceArn",
+                      "description": "(Required) The ARN of the Data Lifecycle Manager resource. This ARN uniquely identifies the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Tags\": {\n    \"Environment\": \"Production\",\n    \"Team\": \"Operations\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2ade1051-9b62-46b3-9d18-3c655a4bc8de",
+          "name": "Tag Resource",
+          "request": {
+            "name": "Tag Resource",
+            "description": {
+              "content": "Adds the specified tags to the specified resource.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tags",
+                ":resourceArn"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "resourceArn",
+                  "description": "(Required) The ARN of the Data Lifecycle Manager resource. This ARN uniquely identifies the resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Tags\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\",\n    \"key_2\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2e01613b-75e4-4708-889a-3a78ddc399a2",
+              "name": "Tags added successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tags",
+                    ":resourceArn"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "resourceArn",
+                      "description": "(Required) The ARN of the Data Lifecycle Manager resource. This ARN uniquely identifies the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Tags\": {\n    \"CostCenter\": \"CC-001\",\n    \"Owner\": \"platform-team\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7baae62c-3539-4a39-9234-e5998c402aea",
+          "name": "Untag Resource",
+          "request": {
+            "name": "Untag Resource",
+            "description": {
+              "content": "Removes the specified tags from the specified resource.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tags",
+                ":resourceArn"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "tagKeys",
+                  "value": "<string>",
+                  "description": "(Required) The tag keys to remove"
+                },
+                {
+                  "disabled": false,
+                  "key": "tagKeys",
+                  "value": "<string>",
+                  "description": "(Required) The tag keys to remove"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "resourceArn",
+                  "description": "(Required) The ARN of the Data Lifecycle Manager resource. This ARN uniquely identifies the resource."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ea6a00e7-da8d-41bb-8a6e-af3505f3a972",
+              "name": "Tags removed successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tags",
+                    ":resourceArn"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "tagKeys",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tagKeys",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "resourceArn",
+                      "description": "(Required) The ARN of the Data Lifecycle Manager resource. This ARN uniquely identifies the resource."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://dlm.amazonaws.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "020a0d10-6a67-4fb7-afe8-20ea4a4098fb",
+    "name": "Amazon Data Lifecycle Manager API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Amazon Data Lifecycle Manager API enables programmatic management of lifecycle policies for automating the creation, retention, and deletion of EBS snapshots and AMIs to meet backup and compliance requirements.\n\nContact Support:\n Name: AWS Support",
+      "type": "text/plain"
+    }
+  }
+}
