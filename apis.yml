@@ -56,27 +56,24 @@ apis:
 common:
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/amazon-data-lifecycle-manager/overview
-  - type: ArazzoWorkflows
-    url: arazzo/
-    workflows:
-      - url: arazzo/amazon-data-lifecycle-manager-decommission-policy-workflow.yml
-        name: Amazon Data Lifecycle Manager Decommission Policy
-        summary: Retrieve a lifecycle policy, delete it, and confirm it no longer appears in the list.
-      - url: arazzo/amazon-data-lifecycle-manager-disable-policy-workflow.yml
-        name: Amazon Data Lifecycle Manager Disable Policy
-        summary: Disable a lifecycle policy and confirm the state change by reading it back.
-      - url: arazzo/amazon-data-lifecycle-manager-provision-policy-workflow.yml
-        name: Amazon Data Lifecycle Manager Provision Policy
-        summary: Create an EBS snapshot lifecycle policy, read it back, and confirm it in the policy list.
-      - url: arazzo/amazon-data-lifecycle-manager-reconfigure-schedule-workflow.yml
-        name: Amazon Data Lifecycle Manager Reconfigure Schedule
-        summary: Read a policy, re-enable and rewrite its snapshot schedule, then confirm the change.
-      - url: arazzo/amazon-data-lifecycle-manager-tag-policy-resource-workflow.yml
-        name: Amazon Data Lifecycle Manager Tag Policy Resource
-        summary: Add tags to a DLM resource and confirm them by listing the resource's tags.
-      - url: arazzo/amazon-data-lifecycle-manager-untag-policy-resource-workflow.yml
-        name: Amazon Data Lifecycle Manager Untag Policy Resource
-        summary: Remove tags from a DLM resource and confirm removal by listing the resource's tags.
+  - type: Arazzo
+    url: arazzo/amazon-data-lifecycle-manager-decommission-policy-workflow.yml
+    name: Amazon Data Lifecycle Manager Decommission Policy
+  - type: Arazzo
+    url: arazzo/amazon-data-lifecycle-manager-disable-policy-workflow.yml
+    name: Amazon Data Lifecycle Manager Disable Policy
+  - type: Arazzo
+    url: arazzo/amazon-data-lifecycle-manager-provision-policy-workflow.yml
+    name: Amazon Data Lifecycle Manager Provision Policy
+  - type: Arazzo
+    url: arazzo/amazon-data-lifecycle-manager-reconfigure-schedule-workflow.yml
+    name: Amazon Data Lifecycle Manager Reconfigure Schedule
+  - type: Arazzo
+    url: arazzo/amazon-data-lifecycle-manager-tag-policy-resource-workflow.yml
+    name: Amazon Data Lifecycle Manager Tag Policy Resource
+  - type: Arazzo
+    url: arazzo/amazon-data-lifecycle-manager-untag-policy-resource-workflow.yml
+    name: Amazon Data Lifecycle Manager Untag Policy Resource
   - type: Portal
     url: https://aws.amazon.com/ebs/data-lifecycle-manager/
   - type: DeveloperPortal
@@ -93,7 +90,7 @@ common:
     url: https://github.com/aws
   - type: Console
     url: https://console.aws.amazon.com/ec2/v2/home#Lifecycle
-  - type: SignUp
+  - type: Signup
     url: https://portal.aws.amazon.com/billing/signup
   - type: Login
     url: https://signin.aws.amazon.com/
