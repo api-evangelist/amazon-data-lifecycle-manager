@@ -54,6 +54,14 @@ apis:
       - type: JSONLD
         url: json-ld/amazon-data-lifecycle-manager-context.jsonld
 common:
+  - type: TrustCenter
+    url: security/amazon-data-lifecycle-manager-trust-center.yml
+  - type: VulnerabilityDisclosure
+    url: security/amazon-data-lifecycle-manager-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/amazon-data-lifecycle-manager-domain-security.yml
+  - type: Authentication
+    url: authentication/amazon-data-lifecycle-manager-authentication.yml
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/amazon-data-lifecycle-manager/overview
   - type: Arazzo
