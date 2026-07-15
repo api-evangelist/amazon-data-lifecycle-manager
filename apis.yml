@@ -54,6 +54,8 @@ apis:
       - type: JSONLD
         url: json-ld/amazon-data-lifecycle-manager-context.jsonld
 common:
+  - type: AgenticAccess
+    url: agentic-access/amazon-data-lifecycle-manager-agentic-access.yml
   - type: TrustCenter
     url: security/amazon-data-lifecycle-manager-trust-center.yml
   - type: VulnerabilityDisclosure
