@@ -1,0 +1,148 @@
+openapi: 3.1.0
+info:
+  title: Amazon Data Lifecycle Manager Lifecycle Policies Tags API
+  description: The Amazon Data Lifecycle Manager API enables programmatic management of lifecycle policies for automating the creation, retention, and deletion of EBS snapshots and AMIs to meet backup and compliance requirements.
+  version: 2018-01-12
+  contact:
+    name: AWS Support
+    url: https://aws.amazon.com/premiumsupport/
+servers:
+- url: https://dlm.amazonaws.com
+  description: Amazon Data Lifecycle Manager API
+security:
+- awsSignatureV4: []
+tags:
+- name: Tags
+  description: Operations for managing resource tags
+paths:
+  /tags/{resourceArn}:
+    get:
+      operationId: listTagsForResource
+      summary: List Tags for Resource
+      description: Returns the tags for the specified resource.
+      tags:
+      - Tags
+      parameters:
+      - name: resourceArn
+        in: path
+        required: true
+        description: The ARN of the Data Lifecycle Manager resource. This ARN uniquely identifies the resource.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Tags returned successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTagsForResourceResponse'
+              examples:
+                default:
+                  x-microcks-default: true
+                  value:
+                    Tags:
+                      Environment: Production
+                      Team: Operations
+    post:
+      operationId: tagResource
+      summary: Tag Resource
+      description: Adds the specified tags to the specified resource.
+      tags:
+      - Tags
+      parameters:
+      - name: resourceArn
+        in: path
+        required: true
+        description: The ARN of the Data Lifecycle Manager resource. This ARN uniquely identifies the resource.
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TagResourceRequest'
+            examples:
+              default:
+                x-microcks-default: true
+                value:
+                  Tags:
+                    CostCenter: CC-001
+                    Owner: platform-team
+      responses:
+        '200':
+          description: Tags added successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TagResourceResponse'
+              examples:
+                default:
+                  x-microcks-default: true
+                  value: {}
+    delete:
+      operationId: untagResource
+      summary: Untag Resource
+      description: Removes the specified tags from the specified resource.
+      tags:
+      - Tags
+      parameters:
+      - name: resourceArn
+        in: path
+        required: true
+        description: The ARN of the Data Lifecycle Manager resource. This ARN uniquely identifies the resource.
+        schema:
+          type: string
+      - name: tagKeys
+        in: query
+        required: true
+        description: The tag keys to remove
+        schema:
+          type: array
+          items:
+            type: string
+      responses:
+        '200':
+          description: Tags removed successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UntagResourceResponse'
+              examples:
+                default:
+                  x-microcks-default: true
+                  value: {}
+components:
+  schemas:
+    ListTagsForResourceResponse:
+      description: Response containing tags for a resource.
+      type: object
+      properties:
+        Tags:
+          type: object
+          description: The tags associated with the resource
+          additionalProperties:
+            type: string
+    TagResourceRequest:
+      description: Request body for adding tags to a resource.
+      type: object
+      required:
+      - Tags
+      properties:
+        Tags:
+          type: object
+          description: The tags to add
+          additionalProperties:
+            type: string
+    TagResourceResponse:
+      description: Response after adding tags.
+      type: object
+    UntagResourceResponse:
+      description: Response after removing tags.
+      type: object
+  securitySchemes:
+    awsSignatureV4:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: AWS Signature Version 4 authentication
