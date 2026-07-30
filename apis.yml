@@ -6,7 +6,20 @@ description: >-
   storage costs and simplifying backup management. Policies target EBS volumes and EC2 instances using tags, execute on
   configurable schedules, and apply flexible retention rules based on count or age.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/amazon-data-lifecycle-manager.png
 tags:
   - AWS
   - Backup
@@ -20,39 +33,54 @@ created: '2026-03-16'
 modified: '2026-05-19'
 specificationVersion: '0.19'
 apis:
-  - aid: amazon-data-lifecycle-manager:amazon-dlm-api
-    name: Amazon Data Lifecycle Manager API
-    description: >-
-      The Amazon Data Lifecycle Manager API enables programmatic management of lifecycle policies for automating the
-      creation, retention, and deletion of EBS snapshots and AMIs to meet backup and compliance requirements. Supports
-      EBS snapshot management, AMI lifecycle management, and event-based snapshot policies.
-    humanURL: https://aws.amazon.com/ebs/data-lifecycle-manager/
-    baseURL: https://dlm.amazonaws.com
-    tags:
-      - Automation
-      - EBS Snapshots
-      - Lifecycle Management
-      - Backup
-      - AMI Management
-    properties:
-      - type: Documentation
-        url: https://docs.aws.amazon.com/dlm/latest/APIReference/Welcome.html
-      - type: OpenAPI
-        url: openapi/amazon-data-lifecycle-manager-openapi.yml
-      - type: OpenAPI
-        url: https://api.apis.guru/v2/specs/amazonaws.com/dlm/2018-01-12/openapi.yaml
-      - type: GettingStarted
-        url: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshot-lifecycle.html
-      - type: APIReference
-        url: https://docs.aws.amazon.com/dlm/latest/APIReference/
-      - type: JSONSchema
-        url: json-schema/lifecycle-policy-schema.json
-      - type: JSONSchema
-        url: json-schema/policy-details-schema.json
-      - type: JSONSchema
-        url: json-schema/schedule-schema.json
-      - type: JSONLD
-        url: json-ld/amazon-data-lifecycle-manager-context.jsonld
+- aid: amazon-data-lifecycle-manager:amazon-data-lifecycle-manager-lifecycle-policies-api
+  name: Amazon Data Lifecycle Manager Lifecycle Policies API
+  description: Operations for managing EBS snapshot and AMI lifecycle policies
+  humanURL: https://aws.amazon.com/ebs/data-lifecycle-manager/
+  baseURL: https://dlm.amazonaws.com
+  tags:
+  - Lifecycle Policies
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-data-lifecycle-manager-lifecycle-policies-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/dlm/latest/APIReference/Welcome.html
+  - type: GettingStarted
+    url: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshot-lifecycle.html
+  - type: APIReference
+    url: https://docs.aws.amazon.com/dlm/latest/APIReference/
+  - type: JSONSchema
+    url: json-schema/lifecycle-policy-schema.json
+  - type: JSONSchema
+    url: json-schema/policy-details-schema.json
+  - type: JSONSchema
+    url: json-schema/schedule-schema.json
+  - type: JSONLD
+    url: json-ld/amazon-data-lifecycle-manager-context.jsonld
+- aid: amazon-data-lifecycle-manager:amazon-data-lifecycle-manager-tags-api
+  name: Amazon Data Lifecycle Manager Tags API
+  description: Operations for managing resource tags
+  humanURL: https://aws.amazon.com/ebs/data-lifecycle-manager/
+  baseURL: https://dlm.amazonaws.com
+  tags:
+  - Tags
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-data-lifecycle-manager-tags-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/dlm/latest/APIReference/Welcome.html
+  - type: GettingStarted
+    url: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshot-lifecycle.html
+  - type: APIReference
+    url: https://docs.aws.amazon.com/dlm/latest/APIReference/
+  - type: JSONSchema
+    url: json-schema/lifecycle-policy-schema.json
+  - type: JSONSchema
+    url: json-schema/policy-details-schema.json
+  - type: JSONSchema
+    url: json-schema/schedule-schema.json
+  - type: JSONLD
+    url: json-ld/amazon-data-lifecycle-manager-context.jsonld
 common:
   - type: AgenticAccess
     url: agentic-access/amazon-data-lifecycle-manager-agentic-access.yml
