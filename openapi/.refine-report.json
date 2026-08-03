@@ -1,0 +1,16 @@
+{
+  "provider": "amazon-data-lifecycle-manager",
+  "sources": [
+    "amazon-data-lifecycle-manager-lifecycle-policies-api-openapi.yml",
+    "amazon-data-lifecycle-manager-tags-api-openapi.yml"
+  ],
+  "outputs": [
+    "amazon-data-lifecycle-manager-lifecycle-policies-api-openapi.yml",
+    "amazon-data-lifecycle-manager-tags-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
