@@ -12,8 +12,8 @@ info:
     underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: dlmApi
-  url: ../openapi/amazon-data-lifecycle-manager-openapi.yml
+- name: lifecyclePoliciesApi
+  url: ../openapi/amazon-data-lifecycle-manager-lifecycle-policies-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: reconfigure-schedule

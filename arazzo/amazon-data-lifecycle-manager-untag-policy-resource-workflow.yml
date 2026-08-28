@@ -10,8 +10,8 @@ info:
     read and executed without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: dlmApi
-  url: ../openapi/amazon-data-lifecycle-manager-openapi.yml
+- name: tagsApi
+  url: ../openapi/amazon-data-lifecycle-manager-tags-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: untag-policy-resource
