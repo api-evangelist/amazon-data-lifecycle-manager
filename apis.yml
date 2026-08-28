@@ -6,6 +6,18 @@ description: >-
   storage costs and simplifying backup management. Policies target EBS volumes and EC2 instances using tags, execute on
   configurable schedules, and apply flexible retention rules based on count or age.
 type: Index
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
