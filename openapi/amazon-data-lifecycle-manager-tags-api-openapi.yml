@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Amazon Data Lifecycle Manager Lifecycle Policies Tags API
+  title: Amazon Data Lifecycle Manager Tags API
   description: The Amazon Data Lifecycle Manager API enables programmatic management of lifecycle policies for automating the creation, retention, and deletion of EBS snapshots and AMIs to meet backup and compliance requirements.
   version: 2018-01-12
   contact:
@@ -114,6 +114,18 @@ paths:
                   value: {}
 components:
   schemas:
+    ListTagsForResourceResponse:
+      description: Response containing tags for a resource.
+      type: object
+      properties:
+        Tags:
+          type: object
+          description: The tags associated with the resource
+          additionalProperties:
+            type: string
+    UntagResourceResponse:
+      description: Response after removing tags.
+      type: object
     TagResourceResponse:
       description: Response after adding tags.
       type: object
@@ -128,18 +140,6 @@ components:
           description: The tags to add
           additionalProperties:
             type: string
-    ListTagsForResourceResponse:
-      description: Response containing tags for a resource.
-      type: object
-      properties:
-        Tags:
-          type: object
-          description: The tags associated with the resource
-          additionalProperties:
-            type: string
-    UntagResourceResponse:
-      description: Response after removing tags.
-      type: object
   securitySchemes:
     awsSignatureV4:
       type: apiKey
