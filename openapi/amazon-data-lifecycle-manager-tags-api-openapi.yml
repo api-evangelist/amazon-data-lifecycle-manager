@@ -114,6 +114,12 @@ paths:
                   value: {}
 components:
   schemas:
+    UntagResourceResponse:
+      description: Response after removing tags.
+      type: object
+    TagResourceResponse:
+      description: Response after adding tags.
+      type: object
     ListTagsForResourceResponse:
       description: Response containing tags for a resource.
       type: object
@@ -123,12 +129,6 @@ components:
           description: The tags associated with the resource
           additionalProperties:
             type: string
-    UntagResourceResponse:
-      description: Response after removing tags.
-      type: object
-    TagResourceResponse:
-      description: Response after adding tags.
-      type: object
     TagResourceRequest:
       description: Request body for adding tags to a resource.
       type: object

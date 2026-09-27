@@ -96,7 +96,7 @@ apis:
     url: json-ld/amazon-data-lifecycle-manager-context.jsonld
 common:
 - type: Website
-  url: https://amazon.com
+  url: https://aws.amazon.com/ebs/data-lifecycle-manager/
 - type: AgenticAccess
   url: agentic-access/amazon-data-lifecycle-manager-agentic-access.yml
 - type: TrustCenter
@@ -230,5 +230,5 @@ integrations:
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
-x-parent: aws
+x-parent: amazon-web-services
 x-relationship: product
