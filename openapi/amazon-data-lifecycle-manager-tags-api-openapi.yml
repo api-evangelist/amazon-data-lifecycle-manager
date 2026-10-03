@@ -117,6 +117,17 @@ components:
     UntagResourceResponse:
       description: Response after removing tags.
       type: object
+    TagResourceRequest:
+      description: Request body for adding tags to a resource.
+      type: object
+      required:
+      - Tags
+      properties:
+        Tags:
+          type: object
+          description: The tags to add
+          additionalProperties:
+            type: string
     TagResourceResponse:
       description: Response after adding tags.
       type: object
@@ -127,17 +138,6 @@ components:
         Tags:
           type: object
           description: The tags associated with the resource
-          additionalProperties:
-            type: string
-    TagResourceRequest:
-      description: Request body for adding tags to a resource.
-      type: object
-      required:
-      - Tags
-      properties:
-        Tags:
-          type: object
-          description: The tags to add
           additionalProperties:
             type: string
   securitySchemes:
