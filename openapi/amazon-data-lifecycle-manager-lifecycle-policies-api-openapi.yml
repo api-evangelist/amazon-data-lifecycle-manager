@@ -291,6 +291,33 @@ components:
         FastRestoreRule:
           type: object
           description: Configuration for fast snapshot restore
+    DeleteLifecyclePolicyResponse:
+      description: Response after deleting a lifecycle policy.
+      type: object
+    RetainRule:
+      description: Specifies the number of snapshots to keep or the age after which snapshots are deleted.
+      type: object
+      properties:
+        Count:
+          type: integer
+          description: The number of snapshots to retain
+        Interval:
+          type: integer
+          description: The amount of time to retain each snapshot
+        IntervalUnit:
+          type: string
+          description: The unit of time for the retention period
+          enum:
+          - DAYS
+          - WEEKS
+          - MONTHS
+          - YEARS
+    GetLifecyclePolicyResponse:
+      description: Response containing the details of a lifecycle policy.
+      type: object
+      properties:
+        Policy:
+          $ref: '#/components/schemas/LifecyclePolicy'
     CreateRule:
       description: Specifies when and how to create snapshots for event-based policies or schedules.
       type: object
@@ -311,78 +338,19 @@ components:
         CronExpression:
           type: string
           description: The schedule for creating snapshots using a cron expression
-    GetLifecyclePoliciesResponse:
-      description: Response containing a list of lifecycle policy summaries.
+    Error:
+      description: Standard error response from the Data Lifecycle Manager API.
       type: object
       properties:
-        Policies:
-          type: array
-          items:
-            $ref: '#/components/schemas/LifecyclePolicySummary'
-    UpdateLifecyclePolicyRequest:
-      description: Request body for updating a lifecycle policy.
-      type: object
-      properties:
-        ExecutionRoleArn:
+        message:
           type: string
-          description: The updated ARN of the IAM role. This ARN uniquely identifies the role.
-        State:
+          description: A human-readable error message
+        code:
           type: string
-          description: The updated state of the policy
-          enum:
-          - ENABLED
-          - DISABLED
-        Description:
+          description: An error code identifying the type of error
+        requestId:
           type: string
-          description: The updated description
-        PolicyDetails:
-          $ref: '#/components/schemas/PolicyDetails'
-    LifecyclePolicySummary:
-      description: Summary information about a lifecycle policy.
-      type: object
-      properties:
-        PolicyId:
-          type: string
-          description: The identifier of the lifecycle policy
-        Description:
-          type: string
-          description: The description of the lifecycle policy
-        State:
-          type: string
-          description: The current state of the policy
-          enum:
-          - ENABLED
-          - DISABLED
-          - ERROR
-        PolicyType:
-          type: string
-          description: The type of lifecycle policy
-        PolicySummary:
-          type: string
-          description: A summary of the policy details
-        Tags:
-          type: object
-          additionalProperties:
-            type: string
-    GetLifecyclePolicyResponse:
-      description: Response containing the details of a lifecycle policy.
-      type: object
-      properties:
-        Policy:
-          $ref: '#/components/schemas/LifecyclePolicy'
-    CreateLifecyclePolicyResponse:
-      description: Response after creating a lifecycle policy.
-      type: object
-      properties:
-        PolicyId:
-          type: string
-          description: The identifier of the newly created lifecycle policy
-    UpdateLifecyclePolicyResponse:
-      description: Response after updating a lifecycle policy.
-      type: object
-    DeleteLifecyclePolicyResponse:
-      description: Response after deleting a lifecycle policy.
-      type: object
+          description: The unique ID of the request that resulted in this error
     LifecyclePolicy:
       description: A complete lifecycle policy definition for automating EBS snapshot or AMI management.
       type: object
@@ -421,19 +389,44 @@ components:
           description: Tags associated with the policy
           additionalProperties:
             type: string
-    Error:
-      description: Standard error response from the Data Lifecycle Manager API.
+    CreateLifecyclePolicyResponse:
+      description: Response after creating a lifecycle policy.
       type: object
       properties:
-        message:
+        PolicyId:
           type: string
-          description: A human-readable error message
-        code:
+          description: The identifier of the newly created lifecycle policy
+    Tag:
+      description: A key-value tag pair applied to an AWS resource.
+      type: object
+      required:
+      - Key
+      - Value
+      properties:
+        Key:
           type: string
-          description: An error code identifying the type of error
-        requestId:
+          description: The tag key
+        Value:
           type: string
-          description: The unique ID of the request that resulted in this error
+          description: The tag value
+    UpdateLifecyclePolicyRequest:
+      description: Request body for updating a lifecycle policy.
+      type: object
+      properties:
+        ExecutionRoleArn:
+          type: string
+          description: The updated ARN of the IAM role. This ARN uniquely identifies the role.
+        State:
+          type: string
+          description: The updated state of the policy
+          enum:
+          - ENABLED
+          - DISABLED
+        Description:
+          type: string
+          description: The updated description
+        PolicyDetails:
+          $ref: '#/components/schemas/PolicyDetails'
     CreateLifecyclePolicyRequest:
       description: Request body for creating a new lifecycle policy.
       type: object
@@ -463,6 +456,36 @@ components:
           description: Tags to apply to the policy
           additionalProperties:
             type: string
+    LifecyclePolicySummary:
+      description: Summary information about a lifecycle policy.
+      type: object
+      properties:
+        PolicyId:
+          type: string
+          description: The identifier of the lifecycle policy
+        Description:
+          type: string
+          description: The description of the lifecycle policy
+        State:
+          type: string
+          description: The current state of the policy
+          enum:
+          - ENABLED
+          - DISABLED
+          - ERROR
+        PolicyType:
+          type: string
+          description: The type of lifecycle policy
+        PolicySummary:
+          type: string
+          description: A summary of the policy details
+        Tags:
+          type: object
+          additionalProperties:
+            type: string
+    UpdateLifecyclePolicyResponse:
+      description: Response after updating a lifecycle policy.
+      type: object
     PolicyDetails:
       description: Specifies the configuration of a lifecycle policy.
       type: object
@@ -495,37 +518,14 @@ components:
         Parameters:
           type: object
           description: Additional policy parameters
-    RetainRule:
-      description: Specifies the number of snapshots to keep or the age after which snapshots are deleted.
+    GetLifecyclePoliciesResponse:
+      description: Response containing a list of lifecycle policy summaries.
       type: object
       properties:
-        Count:
-          type: integer
-          description: The number of snapshots to retain
-        Interval:
-          type: integer
-          description: The amount of time to retain each snapshot
-        IntervalUnit:
-          type: string
-          description: The unit of time for the retention period
-          enum:
-          - DAYS
-          - WEEKS
-          - MONTHS
-          - YEARS
-    Tag:
-      description: A key-value tag pair applied to an AWS resource.
-      type: object
-      required:
-      - Key
-      - Value
-      properties:
-        Key:
-          type: string
-          description: The tag key
-        Value:
-          type: string
-          description: The tag value
+        Policies:
+          type: array
+          items:
+            $ref: '#/components/schemas/LifecyclePolicySummary'
   securitySchemes:
     awsSignatureV4:
       type: apiKey
