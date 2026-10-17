@@ -264,6 +264,14 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    GetLifecyclePoliciesResponse:
+      description: Response containing a list of lifecycle policy summaries.
+      type: object
+      properties:
+        Policies:
+          type: array
+          items:
+            $ref: '#/components/schemas/LifecyclePolicySummary'
     Schedule:
       description: Specifies the schedule for creating snapshots or AMIs in a lifecycle policy.
       type: object
@@ -291,53 +299,6 @@ components:
         FastRestoreRule:
           type: object
           description: Configuration for fast snapshot restore
-    DeleteLifecyclePolicyResponse:
-      description: Response after deleting a lifecycle policy.
-      type: object
-    RetainRule:
-      description: Specifies the number of snapshots to keep or the age after which snapshots are deleted.
-      type: object
-      properties:
-        Count:
-          type: integer
-          description: The number of snapshots to retain
-        Interval:
-          type: integer
-          description: The amount of time to retain each snapshot
-        IntervalUnit:
-          type: string
-          description: The unit of time for the retention period
-          enum:
-          - DAYS
-          - WEEKS
-          - MONTHS
-          - YEARS
-    GetLifecyclePolicyResponse:
-      description: Response containing the details of a lifecycle policy.
-      type: object
-      properties:
-        Policy:
-          $ref: '#/components/schemas/LifecyclePolicy'
-    CreateRule:
-      description: Specifies when and how to create snapshots for event-based policies or schedules.
-      type: object
-      properties:
-        Interval:
-          type: integer
-          description: The interval between snapshots in the schedule
-        IntervalUnit:
-          type: string
-          description: The unit of time for the interval
-          enum:
-          - HOURS
-        Times:
-          type: array
-          description: The time of day to start the snapshot (in UTC)
-          items:
-            type: string
-        CronExpression:
-          type: string
-          description: The schedule for creating snapshots using a cron expression
     Error:
       description: Standard error response from the Data Lifecycle Manager API.
       type: object
@@ -351,64 +312,47 @@ components:
         requestId:
           type: string
           description: The unique ID of the request that resulted in this error
-    LifecyclePolicy:
-      description: A complete lifecycle policy definition for automating EBS snapshot or AMI management.
+    UpdateLifecyclePolicyResponse:
+      description: Response after updating a lifecycle policy.
+      type: object
+    PolicyDetails:
+      description: Specifies the configuration of a lifecycle policy.
       type: object
       properties:
-        PolicyId:
+        PolicyType:
           type: string
-          description: The identifier of the lifecycle policy
-        Description:
-          type: string
-          description: The description of the lifecycle policy
-        State:
-          type: string
-          description: The current state of the policy
+          description: The type of lifecycle policy
           enum:
-          - ENABLED
-          - DISABLED
-          - ERROR
-        StatusMessage:
-          type: string
-          description: Status message if the policy is in an error state
-        ExecutionRoleArn:
-          type: string
-          description: The ARN of the IAM role used by DLM to manage the lifecycle policy. This ARN uniquely identifies the role.
-        DateCreated:
-          type: string
-          format: date-time
-          description: When the policy was created
-        DateModified:
-          type: string
-          format: date-time
-          description: When the policy was last modified
-        PolicyDetails:
-          $ref: '#/components/schemas/PolicyDetails'
-        Tags:
-          type: object
-          description: Tags associated with the policy
-          additionalProperties:
+          - EBS_SNAPSHOT_MANAGEMENT
+          - IMAGE_MANAGEMENT
+          - EVENT_BASED_POLICY
+        ResourceTypes:
+          type: array
+          description: The type of resource managed by the policy
+          items:
             type: string
-    CreateLifecyclePolicyResponse:
-      description: Response after creating a lifecycle policy.
+            enum:
+            - VOLUME
+            - INSTANCE
+        TargetTags:
+          type: array
+          description: Specifies the volumes or instances to target
+          items:
+            $ref: '#/components/schemas/Tag'
+        Schedules:
+          type: array
+          description: The schedules for creating snapshots or AMIs
+          items:
+            $ref: '#/components/schemas/Schedule'
+        Parameters:
+          type: object
+          description: Additional policy parameters
+    GetLifecyclePolicyResponse:
+      description: Response containing the details of a lifecycle policy.
       type: object
       properties:
-        PolicyId:
-          type: string
-          description: The identifier of the newly created lifecycle policy
-    Tag:
-      description: A key-value tag pair applied to an AWS resource.
-      type: object
-      required:
-      - Key
-      - Value
-      properties:
-        Key:
-          type: string
-          description: The tag key
-        Value:
-          type: string
-          description: The tag value
+        Policy:
+          $ref: '#/components/schemas/LifecyclePolicy'
     UpdateLifecyclePolicyRequest:
       description: Request body for updating a lifecycle policy.
       type: object
@@ -456,6 +400,64 @@ components:
           description: Tags to apply to the policy
           additionalProperties:
             type: string
+    LifecyclePolicy:
+      description: A complete lifecycle policy definition for automating EBS snapshot or AMI management.
+      type: object
+      properties:
+        PolicyId:
+          type: string
+          description: The identifier of the lifecycle policy
+        Description:
+          type: string
+          description: The description of the lifecycle policy
+        State:
+          type: string
+          description: The current state of the policy
+          enum:
+          - ENABLED
+          - DISABLED
+          - ERROR
+        StatusMessage:
+          type: string
+          description: Status message if the policy is in an error state
+        ExecutionRoleArn:
+          type: string
+          description: The ARN of the IAM role used by DLM to manage the lifecycle policy. This ARN uniquely identifies the role.
+        DateCreated:
+          type: string
+          format: date-time
+          description: When the policy was created
+        DateModified:
+          type: string
+          format: date-time
+          description: When the policy was last modified
+        PolicyDetails:
+          $ref: '#/components/schemas/PolicyDetails'
+        Tags:
+          type: object
+          description: Tags associated with the policy
+          additionalProperties:
+            type: string
+    CreateRule:
+      description: Specifies when and how to create snapshots for event-based policies or schedules.
+      type: object
+      properties:
+        Interval:
+          type: integer
+          description: The interval between snapshots in the schedule
+        IntervalUnit:
+          type: string
+          description: The unit of time for the interval
+          enum:
+          - HOURS
+        Times:
+          type: array
+          description: The time of day to start the snapshot (in UTC)
+          items:
+            type: string
+        CronExpression:
+          type: string
+          description: The schedule for creating snapshots using a cron expression
     LifecyclePolicySummary:
       description: Summary information about a lifecycle policy.
       type: object
@@ -483,49 +485,47 @@ components:
           type: object
           additionalProperties:
             type: string
-    UpdateLifecyclePolicyResponse:
-      description: Response after updating a lifecycle policy.
-      type: object
-    PolicyDetails:
-      description: Specifies the configuration of a lifecycle policy.
+    RetainRule:
+      description: Specifies the number of snapshots to keep or the age after which snapshots are deleted.
       type: object
       properties:
-        PolicyType:
+        Count:
+          type: integer
+          description: The number of snapshots to retain
+        Interval:
+          type: integer
+          description: The amount of time to retain each snapshot
+        IntervalUnit:
           type: string
-          description: The type of lifecycle policy
+          description: The unit of time for the retention period
           enum:
-          - EBS_SNAPSHOT_MANAGEMENT
-          - IMAGE_MANAGEMENT
-          - EVENT_BASED_POLICY
-        ResourceTypes:
-          type: array
-          description: The type of resource managed by the policy
-          items:
-            type: string
-            enum:
-            - VOLUME
-            - INSTANCE
-        TargetTags:
-          type: array
-          description: Specifies the volumes or instances to target
-          items:
-            $ref: '#/components/schemas/Tag'
-        Schedules:
-          type: array
-          description: The schedules for creating snapshots or AMIs
-          items:
-            $ref: '#/components/schemas/Schedule'
-        Parameters:
-          type: object
-          description: Additional policy parameters
-    GetLifecyclePoliciesResponse:
-      description: Response containing a list of lifecycle policy summaries.
+          - DAYS
+          - WEEKS
+          - MONTHS
+          - YEARS
+    CreateLifecyclePolicyResponse:
+      description: Response after creating a lifecycle policy.
       type: object
       properties:
-        Policies:
-          type: array
-          items:
-            $ref: '#/components/schemas/LifecyclePolicySummary'
+        PolicyId:
+          type: string
+          description: The identifier of the newly created lifecycle policy
+    Tag:
+      description: A key-value tag pair applied to an AWS resource.
+      type: object
+      required:
+      - Key
+      - Value
+      properties:
+        Key:
+          type: string
+          description: The tag key
+        Value:
+          type: string
+          description: The tag value
+    DeleteLifecyclePolicyResponse:
+      description: Response after deleting a lifecycle policy.
+      type: object
   securitySchemes:
     awsSignatureV4:
       type: apiKey
