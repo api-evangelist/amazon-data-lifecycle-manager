@@ -1,4 +1,4 @@
-# Amazon Data Lifecycle Manager (amazon-data-lifecycle-manager)
+# Amazon Data Lifecycle Manager
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,81 +66,216 @@
 
 Amazon Data Lifecycle Manager provides an automated way to manage the lifecycle of your AWS resources. Using lifecycle policies, you can automate the creation, retention, and deletion of Amazon EBS snapshots and EBS-backed AMIs, reducing storage costs and simplifying backup management. Policies target EBS volumes and EC2 instances using tags, execute on configurable schedules, and apply flexible retention rules based on count or age.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/amazon-data-lifecycle-manager/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/amazon-data-lifecycle-manager/refs/heads/main/apis.yml)
+**Areas:** AWS · Backup · EBS Snapshots · Lifecycle Management · Storage · Automation · Compliance
 
-## Scope
+## Amazon Data Lifecycle Manager on APIs.io
 
-- **Type:** Index
+Everything profiled for Amazon Data Lifecycle Manager is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/amazon-data-lifecycle-manager/](https://apis.io/providers/amazon-data-lifecycle-manager/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (2)
 
-- AWS
-- Backup
-- EBS Snapshots
-- Lifecycle Management
-- Storage
-- Automation
-- Compliance
+- [Amazon Data Lifecycle Manager Lifecycle Policies API](https://apis.io/apis/amazon-data-lifecycle-manager/amazon-data-lifecycle-manager-lifecycle-policies-api/) — Operations for managing EBS snapshot and AMI lifecycle policies
+- [Amazon Data Lifecycle Manager Tags API](https://apis.io/apis/amazon-data-lifecycle-manager/amazon-data-lifecycle-manager-tags-api/) — Operations for managing resource tags
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-03-16
-- **Modified:** 2026-05-19
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Arazzo workflows (6)
 
-### Amazon Data Lifecycle Manager API
+Multi-step workflows that chain operations into a business task.
 
-The Amazon Data Lifecycle Manager API enables programmatic management of lifecycle policies for automating the creation, retention, and deletion of EBS snapshots and AMIs to meet backup and compliance requirements. Supports EBS snapshot management, AMI lifecycle management, and event-based snapshot policies.
+- [Amazon Data Lifecycle Manager Decommission Policy](https://apis.io/arazzos/amazon-data-lifecycle-manager/amazon-data-lifecycle-manager-decommission-policy-workflow/)
+- [Amazon Data Lifecycle Manager Disable Policy](https://apis.io/arazzos/amazon-data-lifecycle-manager/amazon-data-lifecycle-manager-disable-policy-workflow/)
+- [Amazon Data Lifecycle Manager Provision Policy](https://apis.io/arazzos/amazon-data-lifecycle-manager/amazon-data-lifecycle-manager-provision-policy-workflow/)
+- [Amazon Data Lifecycle Manager Reconfigure Schedule](https://apis.io/arazzos/amazon-data-lifecycle-manager/amazon-data-lifecycle-manager-reconfigure-schedule-workflow/)
+- [Amazon Data Lifecycle Manager Tag Policy Resource](https://apis.io/arazzos/amazon-data-lifecycle-manager/amazon-data-lifecycle-manager-tag-policy-resource-workflow/)
+- [Amazon Data Lifecycle Manager Untag Policy Resource](https://apis.io/arazzos/amazon-data-lifecycle-manager/amazon-data-lifecycle-manager-untag-policy-resource-workflow/)
 
-- **Human URL:** [https://aws.amazon.com/ebs/data-lifecycle-manager/](https://aws.amazon.com/ebs/data-lifecycle-manager/)
-- **Base URL:** `https://dlm.amazonaws.com`
+#### Agentic access (1)
 
-#### Tags
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- Automation
-- EBS Snapshots
-- Lifecycle Management
-- Backup
-- AMI Management
+- [Amazon Data Lifecycle Manager Agentic Access](https://apis.io/agentic-access/amazon-data-lifecycle-manager/amazon-data-lifecycle-manager-agentic-access/)
 
-#### Properties
+#### JSON Schema (15)
 
-- [Documentation](https://docs.aws.amazon.com/dlm/latest/APIReference/Welcome.html)
-- [OpenAPI](openapi/amazon-data-lifecycle-manager-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/amazon-data-lifecycle-manager.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/amazon-data-lifecycle-manager.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-- [OpenAPI](https://api.apis.guru/v2/specs/amazonaws.com/dlm/2018-01-12/openapi.yaml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Getting Started](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshot-lifecycle.html)
-- [API Reference](https://docs.aws.amazon.com/dlm/latest/APIReference/)
-- [JSON Schema](json-schema/lifecycle-policy-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/policy-details-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON Schema](json-schema/schedule-schema.json) — [JSON Schema](https://json-schema.org/specification)
-- [JSON-LD](json-ld/amazon-data-lifecycle-manager-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
+The data models the API reads and writes.
 
-## Common Properties
+- [Create Lifecycle Policy Request](https://apis.io/schemas/amazon-data-lifecycle-manager/create-lifecycle-policy-request/)
+- [Create Lifecycle Policy Response](https://apis.io/schemas/amazon-data-lifecycle-manager/create-lifecycle-policy-response/)
+- [Create Rule](https://apis.io/schemas/amazon-data-lifecycle-manager/create-rule/)
+- [Error](https://apis.io/schemas/amazon-data-lifecycle-manager/error/)
+- [Get Lifecycle Policies Response](https://apis.io/schemas/amazon-data-lifecycle-manager/get-lifecycle-policies-response/)
+- [Get Lifecycle Policy Response](https://apis.io/schemas/amazon-data-lifecycle-manager/get-lifecycle-policy-response/)
+- [Lifecycle Policy](https://apis.io/schemas/amazon-data-lifecycle-manager/lifecycle-policy/)
+- [Lifecycle Policy Summary](https://apis.io/schemas/amazon-data-lifecycle-manager/lifecycle-policy-summary/)
+- [List Tags for Resource Response](https://apis.io/schemas/amazon-data-lifecycle-manager/list-tags-for-resource-response/)
+- [Policy Details](https://apis.io/schemas/amazon-data-lifecycle-manager/policy-details/)
+- [Retain Rule](https://apis.io/schemas/amazon-data-lifecycle-manager/retain-rule/)
+- [Schedule](https://apis.io/schemas/amazon-data-lifecycle-manager/schedule/)
+- [Tag](https://apis.io/schemas/amazon-data-lifecycle-manager/tag/)
+- [Tag Resource Request](https://apis.io/schemas/amazon-data-lifecycle-manager/tag-resource-request/)
+- [Update Lifecycle Policy Request](https://apis.io/schemas/amazon-data-lifecycle-manager/update-lifecycle-policy-request/)
 
-- [Arazzo Workflows](arazzo/) — [Arazzo Specification](https://spec.openapis.org/arazzo/latest.html)
-- [Portal](https://aws.amazon.com/ebs/data-lifecycle-manager/)
-- [Developer Portal](https://aws.amazon.com/ebs/data-lifecycle-manager/)
+#### JSON Structure (15)
+
+Data models expressed in JSON Structure.
+
+- [Create Lifecycle Policy Request Structure](https://apis.io/json-structure/amazon-data-lifecycle-manager/create-lifecycle-policy-request-structure/)
+- [Create Lifecycle Policy Response Structure](https://apis.io/json-structure/amazon-data-lifecycle-manager/create-lifecycle-policy-response-structure/)
+- [Create Rule Structure](https://apis.io/json-structure/amazon-data-lifecycle-manager/create-rule-structure/)
+- [Error Structure](https://apis.io/json-structure/amazon-data-lifecycle-manager/error-structure/)
+- [Get Lifecycle Policies Response Structure](https://apis.io/json-structure/amazon-data-lifecycle-manager/get-lifecycle-policies-response-structure/)
+- [Get Lifecycle Policy Response Structure](https://apis.io/json-structure/amazon-data-lifecycle-manager/get-lifecycle-policy-response-structure/)
+- [Lifecycle Policy Structure](https://apis.io/json-structure/amazon-data-lifecycle-manager/lifecycle-policy-structure/)
+- [Lifecycle Policy Summary Structure](https://apis.io/json-structure/amazon-data-lifecycle-manager/lifecycle-policy-summary-structure/)
+- [List Tags For Resource Response Structure](https://apis.io/json-structure/amazon-data-lifecycle-manager/list-tags-for-resource-response-structure/)
+- [Policy Details Structure](https://apis.io/json-structure/amazon-data-lifecycle-manager/policy-details-structure/)
+- [Retain Rule Structure](https://apis.io/json-structure/amazon-data-lifecycle-manager/retain-rule-structure/)
+- [Schedule Structure](https://apis.io/json-structure/amazon-data-lifecycle-manager/schedule-structure/)
+- [Tag Resource Request Structure](https://apis.io/json-structure/amazon-data-lifecycle-manager/tag-resource-request-structure/)
+- [Tag Structure](https://apis.io/json-structure/amazon-data-lifecycle-manager/tag-structure/)
+- [Update Lifecycle Policy Request Structure](https://apis.io/json-structure/amazon-data-lifecycle-manager/update-lifecycle-policy-request-structure/)
+
+#### JSON-LD (1)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [Amazon Data Lifecycle Manager Context](https://apis.io/jsonld/amazon-data-lifecycle-manager/amazon-data-lifecycle-manager-context/)
+
+#### Vocabulary (1)
+
+The provider's domain terms, defined.
+
+- [Amazon Data Lifecycle Manager Vocabulary](https://apis.io/vocabularies/amazon-data-lifecycle-manager/amazon-data-lifecycle-manager-vocabulary/)
+
+#### Examples (15)
+
+Example requests and responses.
+
+- [Create Lifecycle Policy Request Example](https://apis.io/examples/amazon-data-lifecycle-manager/create-lifecycle-policy-request-example/)
+- [Create Lifecycle Policy Response Example](https://apis.io/examples/amazon-data-lifecycle-manager/create-lifecycle-policy-response-example/)
+- [Create Rule Example](https://apis.io/examples/amazon-data-lifecycle-manager/create-rule-example/)
+- [Error Example](https://apis.io/examples/amazon-data-lifecycle-manager/error-example/)
+- [Get Lifecycle Policies Response Example](https://apis.io/examples/amazon-data-lifecycle-manager/get-lifecycle-policies-response-example/)
+- [Get Lifecycle Policy Response Example](https://apis.io/examples/amazon-data-lifecycle-manager/get-lifecycle-policy-response-example/)
+- [Lifecycle Policy Example](https://apis.io/examples/amazon-data-lifecycle-manager/lifecycle-policy-example/)
+- [Lifecycle Policy Summary Example](https://apis.io/examples/amazon-data-lifecycle-manager/lifecycle-policy-summary-example/)
+- [List Tags For Resource Response Example](https://apis.io/examples/amazon-data-lifecycle-manager/list-tags-for-resource-response-example/)
+- [Policy Details Example](https://apis.io/examples/amazon-data-lifecycle-manager/policy-details-example/)
+- [Retain Rule Example](https://apis.io/examples/amazon-data-lifecycle-manager/retain-rule-example/)
+- [Schedule Example](https://apis.io/examples/amazon-data-lifecycle-manager/schedule-example/)
+- [Tag Example](https://apis.io/examples/amazon-data-lifecycle-manager/tag-example/)
+- [Tag Resource Request Example](https://apis.io/examples/amazon-data-lifecycle-manager/tag-resource-request-example/)
+- [Update Lifecycle Policy Request Example](https://apis.io/examples/amazon-data-lifecycle-manager/update-lifecycle-policy-request-example/)
+
+#### Collections (4)
+
+Postman and Open Collection request collections.
+
+- [Amazon Data Lifecycle Manager API](https://apis.io/collections/amazon-data-lifecycle-manager/open-amazon-data-lifecycle-manager/)
+- [Amazon Data Lifecycle Manager Lifecycle Policies API](https://apis.io/collections/amazon-data-lifecycle-manager/open-amazon-data-lifecycle-manager-lifecycle-policies-api/)
+- [Amazon Data Lifecycle Manager Lifecycle Policies Tags API](https://apis.io/collections/amazon-data-lifecycle-manager/open-amazon-data-lifecycle-manager-tags-api/)
+- [Amazon Data Lifecycle Manager API](https://apis.io/collections/amazon-data-lifecycle-manager/postman-amazon-data-lifecycle-manager/)
+
+#### Governance rules (2)
+
+Spectral rulesets for the provider's contracts.
+
+- [Amazon Data Lifecycle Manager — jsonschema rules](https://apis.io/rules/amazon-data-lifecycle-manager/amazon-data-lifecycle-manager-jsonschema-spectral-rules/)
+- [Amazon Data Lifecycle Manager API Rules](https://apis.io/rules/amazon-data-lifecycle-manager/amazon-data-lifecycle-manager-spectral-rules/)
+
+#### Security (4)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Amazon Data Lifecycle Manager Authentication](https://apis.io/security/amazon-data-lifecycle-manager/amazon-data-lifecycle-manager-authentication/)
+- [Amazon Data Lifecycle Manager Domain Security](https://apis.io/security/amazon-data-lifecycle-manager/amazon-data-lifecycle-manager-domain-security/)
+- [Amazon Data Lifecycle Manager Trust Center](https://apis.io/security/amazon-data-lifecycle-manager/amazon-data-lifecycle-manager-trust-center/)
+- [Amazon Data Lifecycle Manager Vulnerability Disclosure](https://apis.io/security/amazon-data-lifecycle-manager/amazon-data-lifecycle-manager-vulnerability-disclosure/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Amazon Data Lifecycle Manager Plans Pricing](https://apis.io/plans/amazon-data-lifecycle-manager/amazon-data-lifecycle-manager-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Amazon Data Lifecycle Manager Rate Limits](https://apis.io/rate-limits/amazon-data-lifecycle-manager/amazon-data-lifecycle-manager-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Amazon Data Lifecycle Manager Finops](https://apis.io/finops/amazon-data-lifecycle-manager/amazon-data-lifecycle-manager-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://aws.amazon.com/ebs/data-lifecycle-manager/)
 - [Documentation](https://docs.aws.amazon.com/dlm/)
-- [Terms of Service](https://aws.amazon.com/service-terms/)
-- [Privacy Policy](https://aws.amazon.com/privacy/)
 - [Support](https://aws.amazon.com/premiumsupport/)
-- [GitHub Organization](https://github.com/aws)
-- [Console](https://console.aws.amazon.com/ec2/v2/home#Lifecycle)
-- [Sign Up](https://portal.aws.amazon.com/billing/signup)
-- [Login](https://signin.aws.amazon.com/)
-- [Status Page](https://health.aws.amazon.com/health/status)
-- [Contact](https://aws.amazon.com/contact-us/)
-- [Spectral Rules](rules/amazon-data-lifecycle-manager-spectral-rules.yml)
-- [Vocabulary](vocabulary/amazon-data-lifecycle-manager-vocabulary.yaml)
-- [Features](undefined)
-- [Use Cases](undefined)
-- [Integrations](undefined)
-- [Integrations](https://aws.amazon.com/marketplace)
+- [Terms of service](https://aws.amazon.com/service-terms/)
+- [Privacy policy](https://aws.amazon.com/privacy/)
+- [GitHub](https://github.com/aws)
+- [Status](https://health.aws.amazon.com/health/status)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 54.7** — strong · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 65.5 |
+| Contract governance | 27.3 |
+| Operational transparency | 36.8 |
+| Developer ergonomics | 63.1 |
+| Access clarity | 43.4 |
+
+**Agent readiness 30.2** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 35.3** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/amazon-data-lifecycle-manager/](https://apis.io/providers/amazon-data-lifecycle-manager/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Amazon Data Lifecycle Manager: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/amazon-data-lifecycle-manager/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
