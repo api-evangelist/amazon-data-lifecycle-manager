@@ -1,11 +1,15 @@
 aid: amazon-data-lifecycle-manager
+
 name: Amazon Data Lifecycle Manager
+
 description: Amazon Data Lifecycle Manager provides an automated way to manage the lifecycle of your AWS
   resources. Using lifecycle policies, you can automate the creation, retention, and deletion of Amazon
   EBS snapshots and EBS-backed AMIs, reducing storage costs and simplifying backup management. Policies
   target EBS volumes and EC2 instances using tags, execute on configurable schedules, and apply flexible
   retention rules based on count or age.
+
 type: Index
+
 deliveryModel:
   model: saas
   open_source: false
@@ -18,6 +22,7 @@ deliveryModel:
   - pricing
   generated: '2026-08-28'
   method: derived
+
 accessModel:
   pricing: unknown
   onboarding: unknown
@@ -29,9 +34,10 @@ accessModel:
   source:
   - authentication
   - security
-  generated: '2026-11-06'
+  generated: '2026-11-13'
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/amazon-data-lifecycle-manager.png
+
 tags:
 - Amazon Web Services
 - Backup
@@ -48,60 +54,66 @@ tags_raw:
 - Storage
 - Automation
 - Compliance
+
 url: https://raw.githubusercontent.com/api-evangelist/amazon-data-lifecycle-manager/refs/heads/main/apis.yml
+
 created: '2026-03-16'
+
 modified: '2026-09-16'
+
 specificationVersion: '0.23'
-apis:
-- aid: amazon-data-lifecycle-manager:amazon-data-lifecycle-manager-lifecycle-policies-api
-  name: Amazon Data Lifecycle Manager Lifecycle Policies API
-  description: Operations for managing EBS snapshot and AMI lifecycle policies
-  humanURL: https://aws.amazon.com/ebs/data-lifecycle-manager/
-  baseURL: https://dlm.amazonaws.com
-  tags:
-  - Lifecycle Policies
-  properties:
-  - type: OpenAPI
-    url: openapi/amazon-data-lifecycle-manager-lifecycle-policies-api-openapi.yml
-  - type: Documentation
-    url: https://docs.aws.amazon.com/dlm/latest/APIReference/Welcome.html
-  - type: GettingStarted
-    url: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshot-lifecycle.html
-  - type: APIReference
-    url: https://docs.aws.amazon.com/dlm/latest/APIReference/
-  - type: JSONSchema
-    url: json-schema/lifecycle-policy-schema.json
-  - type: JSONSchema
-    url: json-schema/policy-details-schema.json
-  - type: JSONSchema
-    url: json-schema/schedule-schema.json
-  - type: JSONLD
-    url: json-ld/amazon-data-lifecycle-manager-context.jsonld
-- aid: amazon-data-lifecycle-manager:amazon-data-lifecycle-manager-tags-api
-  name: Amazon Data Lifecycle Manager Tags API
-  description: Operations for managing resource tags
-  humanURL: https://aws.amazon.com/ebs/data-lifecycle-manager/
-  baseURL: https://dlm.amazonaws.com
-  tags:
-  - Tags
-  properties:
-  - type: OpenAPI
-    url: openapi/amazon-data-lifecycle-manager-tags-api-openapi.yml
-  - type: Documentation
-    url: https://docs.aws.amazon.com/dlm/latest/APIReference/Welcome.html
-  - type: GettingStarted
-    url: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshot-lifecycle.html
-  - type: APIReference
-    url: https://docs.aws.amazon.com/dlm/latest/APIReference/
-  - type: JSONSchema
-    url: json-schema/lifecycle-policy-schema.json
-  - type: JSONSchema
-    url: json-schema/policy-details-schema.json
-  - type: JSONSchema
-    url: json-schema/schedule-schema.json
-  - type: JSONLD
-    url: json-ld/amazon-data-lifecycle-manager-context.jsonld
+
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
+
 common:
+- type: Spectral
+  url: rules/amazon-data-lifecycle-manager-spectral-rules.yml
+- type: Spectral
+  url: rules/amazon-data-lifecycle-manager-rules.yml
+- type: Spectral
+  url: rules/amazon-data-lifecycle-manager-jsonschema-spectral-rules.yml
+- type: Vocabulary
+  url: vocabulary/amazon-data-lifecycle-manager-vocabulary.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: DataModel
+  url: data-model/amazon-data-lifecycle-manager-data-model.yml
+- type: CLI
+  url: cli/amazon-data-lifecycle-manager-cli.yml
+- type: Conventions
+  url: conventions/amazon-data-lifecycle-manager-conventions.yml
+- type: Compliance
+  url: https://aws.amazon.com/compliance/
+- type: Lifecycle
+  url: lifecycle/amazon-data-lifecycle-manager-lifecycle.yml
+- type: ErrorCatalog
+  url: errors/amazon-data-lifecycle-manager-problem-types.yml
+- type: Conformance
+  url: conformance/amazon-data-lifecycle-manager-conformance.yml
+- type: LLMsTxt
+  url: llms/amazon-data-lifecycle-manager-llms.txt
+- type: SecurityTxt
+  url: well-known/amazon-data-lifecycle-manager-security.txt
+- type: WellKnown
+  url: well-known/amazon-data-lifecycle-manager-well-known.yml
+- type: Hosts
+  url: hosts/amazon-data-lifecycle-manager-hosts.yml
+- type: Vendors
+  url: vendors/amazon-data-lifecycle-manager-vendors.yml
+- type: SDKs
+  url: packages/amazon-data-lifecycle-manager-packages.yml
+- type: Packages
+  url: packages/amazon-data-lifecycle-manager-packages.yml
+- type: Security
+  url: https://aws.amazon.com/security/?nc2=h_dsc_aa_sec
+- type: Pricing
+  url: https://aws.amazon.com/ebs/pricing/
+- type: Newsroom
+  url: https://aws.amazon.com/media/?nc2=h_sol_ind_med
+- type: GettingStarted
+  url: https://developer.amazon.com/frustration-free-setup
 - type: Plans
   url: plans/amazon-data-lifecycle-manager-plans-pricing.yml
 - type: RateLimits
@@ -230,6 +242,63 @@ common:
       with member accounts automatically.
 - type: Integrations
   url: https://aws.amazon.com/marketplace
+- type: UsageTerms
+  url: terms/amazon-data-lifecycle-manager-terms-of-service.yml
+- type: Attestations
+  url: compliance/amazon-data-lifecycle-manager-compliance.yml
+- type: Eligibility
+  url: eligibility/amazon-data-lifecycle-manager-eligibility.yml
+- type: AIPreferences
+  url: ai-preferences/amazon-data-lifecycle-manager-ai-preferences.yml
+
+apis:
+- aid: amazon-data-lifecycle-manager:amazon-data-lifecycle-manager-lifecycle-policies-api
+  name: Amazon Data Lifecycle Manager Lifecycle Policies API
+  description: Operations for managing EBS snapshot and AMI lifecycle policies
+  humanURL: https://aws.amazon.com/ebs/data-lifecycle-manager/
+  baseURL: https://dlm.amazonaws.com
+  tags:
+  - Lifecycle Policies
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-data-lifecycle-manager-lifecycle-policies-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/dlm/latest/APIReference/Welcome.html
+  - type: GettingStarted
+    url: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshot-lifecycle.html
+  - type: APIReference
+    url: https://docs.aws.amazon.com/dlm/latest/APIReference/
+  - type: JSONSchema
+    url: json-schema/lifecycle-policy-schema.json
+  - type: JSONSchema
+    url: json-schema/policy-details-schema.json
+  - type: JSONSchema
+    url: json-schema/schedule-schema.json
+  - type: JSONLD
+    url: json-ld/amazon-data-lifecycle-manager-context.jsonld
+- aid: amazon-data-lifecycle-manager:amazon-data-lifecycle-manager-tags-api
+  name: Amazon Data Lifecycle Manager Tags API
+  description: Operations for managing resource tags
+  humanURL: https://aws.amazon.com/ebs/data-lifecycle-manager/
+  baseURL: https://dlm.amazonaws.com
+  tags:
+  - Tags
+  properties:
+  - type: OpenAPI
+    url: openapi/amazon-data-lifecycle-manager-tags-api-openapi.yml
+  - type: Documentation
+    url: https://docs.aws.amazon.com/dlm/latest/APIReference/Welcome.html
+  - type: GettingStarted
+    url: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshot-lifecycle.html
+  - type: APIReference
+    url: https://docs.aws.amazon.com/dlm/latest/APIReference/
+  - type: JSONSchema
+    url: json-schema/lifecycle-policy-schema.json
+  - type: JSONSchema
+    url: json-schema/policy-details-schema.json
+  - type: JSONLD
+    url: json-ld/amazon-data-lifecycle-manager-context.jsonld
+
 integrations:
 - name: Sign in
 - name: Agent Mode
@@ -240,8 +309,12 @@ integrations:
 - name: Become a Channel Partner
 - name: Sell in AWS Marketplace
 - name: Manage Your Account
-maintainers:
-- FN: Kin Lane
-  email: kin@apievangelist.com
+
 x-parent: amazon-web-services
+
 x-relationship: product
+x-enrichment:
+  date: '2026-11-11'
+  status: enriched
+  artifacts_added: 8
+  pass: local-v6
